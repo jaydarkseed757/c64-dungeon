@@ -1,0 +1,352 @@
+{
+  "file": "baseline.d64ai",
+  "bytes": 233216,
+  "sha256": "20d61ca7db3bc58caf8fab28870fe8abb8e9c69e62a13b19949878d45a3e8c7a",
+  "header": {
+    "magic": "443634414900",
+    "format_major": 1,
+    "format_minor": 1,
+    "header_size": 256,
+    "flags": 15,
+    "arch_id": 1,
+    "n_layers": 4,
+    "n_heads": 4,
+    "head_dim": 16,
+    "d_model": 64,
+    "d_ff": 256,
+    "vocab_size": 197,
+    "ctx_len": 128,
+    "weight_format": 1,
+    "activation_format": 1,
+    "norm_format": 1,
+    "activation_fn": 1,
+    "kv_format": 1,
+    "tile_rows": 27,
+    "tensor_count": 35,
+    "reserved0": 0,
+    "dir_offset": 256,
+    "tokenizer_offset": 230144,
+    "tokenizer_length": 2176,
+    "metadata_offset": 232448,
+    "metadata_length": 647,
+    "image_length": 233216,
+    "payload_crc32": 539544052,
+    "rms_eps_q32": 42950,
+    "inv_sqrt_head_q24": 4194304,
+    "tok_pad": 0,
+    "tok_bos": 1,
+    "tok_eos": 2,
+    "tok_sep": 3,
+    "tok_unk": 4,
+    "first_control_id": 64,
+    "reserved1": 0,
+    "vocab_hash": 322492241,
+    "model_version": "646d36342d626173652d303030310000",
+    "model_name": "444d36342d424153452d30303031000000000000000000000000000000000000",
+    "source_sha256": "53bcc71002db5ed5951d4539895549668a9f98b745f6d0cade066059d1de8dca",
+    "header_crc32": 381740384
+  },
+  "tensors": [
+    {
+      "kind": "tok_emb",
+      "layer": 255,
+      "rows": 197,
+      "cols": 64,
+      "offset": 1024,
+      "length": 13199
+    },
+    {
+      "kind": "pos_emb",
+      "layer": 255,
+      "rows": 128,
+      "cols": 64,
+      "offset": 14336,
+      "length": 8576
+    },
+    {
+      "kind": "attn_norm",
+      "layer": 0,
+      "rows": 64,
+      "cols": 1,
+      "offset": 23040,
+      "length": 128
+    },
+    {
+      "kind": "wq",
+      "layer": 0,
+      "rows": 64,
+      "cols": 64,
+      "offset": 23296,
+      "length": 4288
+    },
+    {
+      "kind": "wk",
+      "layer": 0,
+      "rows": 64,
+      "cols": 64,
+      "offset": 27648,
+      "length": 4288
+    },
+    {
+      "kind": "wv",
+      "layer": 0,
+      "rows": 64,
+      "cols": 64,
+      "offset": 32000,
+      "length": 4288
+    },
+    {
+      "kind": "wo",
+      "layer": 0,
+      "rows": 64,
+      "cols": 64,
+      "offset": 36352,
+      "length": 4288
+    },
+    {
+      "kind": "ffn_norm",
+      "layer": 0,
+      "rows": 64,
+      "cols": 1,
+      "offset": 40704,
+      "length": 128
+    },
+    {
+      "kind": "w1",
+      "layer": 0,
+      "rows": 256,
+      "cols": 64,
+      "offset": 40960,
+      "length": 17152
+    },
+    {
+      "kind": "w2",
+      "layer": 0,
+      "rows": 64,
+      "cols": 256,
+      "offset": 58112,
+      "length": 16576
+    },
+    {
+      "kind": "attn_norm",
+      "layer": 1,
+      "rows": 64,
+      "cols": 1,
+      "offset": 74752,
+      "length": 128
+    },
+    {
+      "kind": "wq",
+      "layer": 1,
+      "rows": 64,
+      "cols": 64,
+      "offset": 75008,
+      "length": 4288
+    },
+    {
+      "kind": "wk",
+      "layer": 1,
+      "rows": 64,
+      "cols": 64,
+      "offset": 79360,
+      "length": 4288
+    },
+    {
+      "kind": "wv",
+      "layer": 1,
+      "rows": 64,
+      "cols": 64,
+      "offset": 83712,
+      "length": 4288
+    },
+    {
+      "kind": "wo",
+      "layer": 1,
+      "rows": 64,
+      "cols": 64,
+      "offset": 88064,
+      "length": 4288
+    },
+    {
+      "kind": "ffn_norm",
+      "layer": 1,
+      "rows": 64,
+      "cols": 1,
+      "offset": 92416,
+      "length": 128
+    },
+    {
+      "kind": "w1",
+      "layer": 1,
+      "rows": 256,
+      "cols": 64,
+      "offset": 92672,
+      "length": 17152
+    },
+    {
+      "kind": "w2",
+      "layer": 1,
+      "rows": 64,
+      "cols": 256,
+      "offset": 109824,
+      "length": 16576
+    },
+    {
+      "kind": "attn_norm",
+      "layer": 2,
+      "rows": 64,
+      "cols": 1,
+      "offset": 126464,
+      "length": 128
+    },
+    {
+      "kind": "wq",
+      "layer": 2,
+      "rows": 64,
+      "cols": 64,
+      "offset": 126720,
+      "length": 4288
+    },
+    {
+      "kind": "wk",
+      "layer": 2,
+      "rows": 64,
+      "cols": 64,
+      "offset": 131072,
+      "length": 4288
+    },
+    {
+      "kind": "wv",
+      "layer": 2,
+      "rows": 64,
+      "cols": 64,
+      "offset": 135424,
+      "length": 4288
+    },
+    {
+      "kind": "wo",
+      "layer": 2,
+      "rows": 64,
+      "cols": 64,
+      "offset": 139776,
+      "length": 4288
+    },
+    {
+      "kind": "ffn_norm",
+      "layer": 2,
+      "rows": 64,
+      "cols": 1,
+      "offset": 144128,
+      "length": 128
+    },
+    {
+      "kind": "w1",
+      "layer": 2,
+      "rows": 256,
+      "cols": 64,
+      "offset": 144384,
+      "length": 17152
+    },
+    {
+      "kind": "w2",
+      "layer": 2,
+      "rows": 64,
+      "cols": 256,
+      "offset": 161536,
+      "length": 16576
+    },
+    {
+      "kind": "attn_norm",
+      "layer": 3,
+      "rows": 64,
+      "cols": 1,
+      "offset": 178176,
+      "length": 128
+    },
+    {
+      "kind": "wq",
+      "layer": 3,
+      "rows": 64,
+      "cols": 64,
+      "offset": 178432,
+      "length": 4288
+    },
+    {
+      "kind": "wk",
+      "layer": 3,
+      "rows": 64,
+      "cols": 64,
+      "offset": 182784,
+      "length": 4288
+    },
+    {
+      "kind": "wv",
+      "layer": 3,
+      "rows": 64,
+      "cols": 64,
+      "offset": 187136,
+      "length": 4288
+    },
+    {
+      "kind": "wo",
+      "layer": 3,
+      "rows": 64,
+      "cols": 64,
+      "offset": 191488,
+      "length": 4288
+    },
+    {
+      "kind": "ffn_norm",
+      "layer": 3,
+      "rows": 64,
+      "cols": 1,
+      "offset": 195840,
+      "length": 128
+    },
+    {
+      "kind": "w1",
+      "layer": 3,
+      "rows": 256,
+      "cols": 64,
+      "offset": 196096,
+      "length": 17152
+    },
+    {
+      "kind": "w2",
+      "layer": 3,
+      "rows": 64,
+      "cols": 256,
+      "offset": 213248,
+      "length": 16576
+    },
+    {
+      "kind": "final_norm",
+      "layer": 255,
+      "rows": 64,
+      "cols": 1,
+      "offset": 229888,
+      "length": 128
+    }
+  ],
+  "parameters": 217984,
+  "quantization_rel_rms_error_max": {
+    "tok_emb": 0.005648838678300311,
+    "pos_emb": 0.005863846080941088,
+    "wq": 0.006134258805124737,
+    "wk": 0.008540122060054722,
+    "wv": 0.006435438842342941,
+    "wo": 0.0061057457627053556,
+    "w1": 0.0061024367034690575,
+    "w2": 0.009331748285745635
+  },
+  "metadata": [
+    "created=2026-11-17T21:33:33+00:00",
+    "model_version=dm64-base-0001",
+    "arch_id=1",
+    "tokenizer=char",
+    "train_config={\"data\": {\"train\": \"datasets/training/train.jsonl\", \"val\": \"datasets/validation/val.jsonl\"}, \"model\": {\"ctx_len\": 128, \"d_ff\": 256, \"d_model\": 64, \"n_heads\": 4, \"n_layers\": 4, \"rms_eps\": 1e-05, \"vocab_size\": 197}, \"name\": \"baseline\", \"train\": {\"batch\": 128, \"eval_every\": 2000, \"grad_clip\": 1.0, \"log_every\": 500, \"lr\": 0.002, \"min_lr\": 0.0001, \"seed\": 64, \"steps\": 12000, \"warmup\": 400, \"weight_decay\": 0.05}}",
+    "train_step=12000",
+    "val_loss_float=0.06314323760510773",
+    "checkpoint_sha256=53bcc71002db5ed5951d4539895549668a9f98b745f6d0cade066059d1de8dca"
+  ]
+}

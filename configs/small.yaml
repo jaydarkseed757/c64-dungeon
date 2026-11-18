@@ -1,0 +1,6 @@
+# Small candidate: d48, 3 layers, 3 heads (head_dim 16), FFN 128.
+name: small
+model: {ctx_len: 128, d_model: 48, n_layers: 3, n_heads: 3, d_ff: 128, rms_eps: 1.0e-5}
+data: {train: datasets/training/train.jsonl, val: datasets/validation/val.jsonl}
+train: {seed: 64, steps: 12000, batch: 128, lr: 2.5e-3, min_lr: 1.0e-4, warmup: 400,
+        weight_decay: 0.05, grad_clip: 1.0, log_every: 500, eval_every: 2000}

@@ -1,0 +1,224 @@
+{
+  "file": "bringup_bpe72.d64ai",
+  "bytes": 38400,
+  "sha256": "b301e626124fb0886000bef1855fd73d012d8cdfbd06abcc44bbe9d5849c3a49",
+  "header": {
+    "magic": "443634414900",
+    "format_major": 1,
+    "format_minor": 1,
+    "header_size": 256,
+    "flags": 15,
+    "arch_id": 1,
+    "n_layers": 2,
+    "n_heads": 2,
+    "head_dim": 16,
+    "d_model": 32,
+    "d_ff": 64,
+    "vocab_size": 256,
+    "ctx_len": 128,
+    "weight_format": 1,
+    "activation_format": 1,
+    "norm_format": 1,
+    "activation_fn": 1,
+    "kv_format": 1,
+    "tile_rows": 64,
+    "tensor_count": 19,
+    "reserved0": 0,
+    "dir_offset": 256,
+    "tokenizer_offset": 35072,
+    "tokenizer_length": 2334,
+    "metadata_offset": 37632,
+    "metadata_length": 673,
+    "image_length": 38400,
+    "payload_crc32": 597110490,
+    "rms_eps_q32": 42950,
+    "inv_sqrt_head_q24": 4194304,
+    "tok_pad": 0,
+    "tok_bos": 1,
+    "tok_eos": 2,
+    "tok_sep": 3,
+    "tok_unk": 4,
+    "first_control_id": 123,
+    "reserved1": 0,
+    "vocab_hash": 297210275,
+    "model_version": "646d36342d62752d62706537322d3031",
+    "model_name": "444d36342d42552d42504537322d303100000000000000000000000000000000",
+    "source_sha256": "8c05df7dbb9113fabe2905e5402cd973997f36a63885a9792e678d747625d288",
+    "header_crc32": 2337648171
+  },
+  "tensors": [
+    {
+      "kind": "tok_emb",
+      "layer": 255,
+      "rows": 256,
+      "cols": 32,
+      "offset": 768,
+      "length": 8960
+    },
+    {
+      "kind": "pos_emb",
+      "layer": 255,
+      "rows": 128,
+      "cols": 32,
+      "offset": 9728,
+      "length": 4480
+    },
+    {
+      "kind": "attn_norm",
+      "layer": 0,
+      "rows": 32,
+      "cols": 1,
+      "offset": 14336,
+      "length": 64
+    },
+    {
+      "kind": "wq",
+      "layer": 0,
+      "rows": 32,
+      "cols": 32,
+      "offset": 14592,
+      "length": 1120
+    },
+    {
+      "kind": "wk",
+      "layer": 0,
+      "rows": 32,
+      "cols": 32,
+      "offset": 15872,
+      "length": 1120
+    },
+    {
+      "kind": "wv",
+      "layer": 0,
+      "rows": 32,
+      "cols": 32,
+      "offset": 17152,
+      "length": 1120
+    },
+    {
+      "kind": "wo",
+      "layer": 0,
+      "rows": 32,
+      "cols": 32,
+      "offset": 18432,
+      "length": 1120
+    },
+    {
+      "kind": "ffn_norm",
+      "layer": 0,
+      "rows": 32,
+      "cols": 1,
+      "offset": 19712,
+      "length": 64
+    },
+    {
+      "kind": "w1",
+      "layer": 0,
+      "rows": 64,
+      "cols": 32,
+      "offset": 19968,
+      "length": 2240
+    },
+    {
+      "kind": "w2",
+      "layer": 0,
+      "rows": 32,
+      "cols": 64,
+      "offset": 22272,
+      "length": 2144
+    },
+    {
+      "kind": "attn_norm",
+      "layer": 1,
+      "rows": 32,
+      "cols": 1,
+      "offset": 24576,
+      "length": 64
+    },
+    {
+      "kind": "wq",
+      "layer": 1,
+      "rows": 32,
+      "cols": 32,
+      "offset": 24832,
+      "length": 1120
+    },
+    {
+      "kind": "wk",
+      "layer": 1,
+      "rows": 32,
+      "cols": 32,
+      "offset": 26112,
+      "length": 1120
+    },
+    {
+      "kind": "wv",
+      "layer": 1,
+      "rows": 32,
+      "cols": 32,
+      "offset": 27392,
+      "length": 1120
+    },
+    {
+      "kind": "wo",
+      "layer": 1,
+      "rows": 32,
+      "cols": 32,
+      "offset": 28672,
+      "length": 1120
+    },
+    {
+      "kind": "ffn_norm",
+      "layer": 1,
+      "rows": 32,
+      "cols": 1,
+      "offset": 29952,
+      "length": 64
+    },
+    {
+      "kind": "w1",
+      "layer": 1,
+      "rows": 64,
+      "cols": 32,
+      "offset": 30208,
+      "length": 2240
+    },
+    {
+      "kind": "w2",
+      "layer": 1,
+      "rows": 32,
+      "cols": 64,
+      "offset": 32512,
+      "length": 2144
+    },
+    {
+      "kind": "final_norm",
+      "layer": 255,
+      "rows": 32,
+      "cols": 1,
+      "offset": 34816,
+      "length": 64
+    }
+  ],
+  "parameters": 28832,
+  "quantization_rel_rms_error_max": {
+    "tok_emb": 0.004817970052719569,
+    "pos_emb": 0.00538707361573318,
+    "wq": 0.005411540284813372,
+    "wk": 0.005565307488019809,
+    "wv": 0.005707962075440902,
+    "wo": 0.005765128826568624,
+    "w1": 0.005376839312179204,
+    "w2": 0.006320922825599661
+  },
+  "metadata": [
+    "created=2026-11-17T21:33:34+00:00",
+    "model_version=dm64-bu-bpe72-01",
+    "arch_id=1",
+    "tokenizer=bpe72",
+    "train_config={\"data\": {\"train\": \"datasets/training/train.jsonl\", \"val\": \"datasets/validation/val.jsonl\"}, \"model\": {\"ctx_len\": 128, \"d_ff\": 64, \"d_model\": 32, \"n_heads\": 2, \"n_layers\": 2, \"rms_eps\": 1e-05, \"vocab_size\": 256}, \"name\": \"bringup_bpe72\", \"tokenizer\": \"bpe72\", \"train\": {\"batch\": 128, \"eval_every\": 1000, \"grad_clip\": 1.0, \"log_every\": 250, \"lr\": 0.003, \"min_lr\": 0.0003, \"seed\": 64, \"steps\": 3000, \"warmup\": 200, \"weight_decay\": 0.05}}",
+    "train_step=3000",
+    "val_loss_float=0.9667170515949286",
+    "checkpoint_sha256=8c05df7dbb9113fabe2905e5402cd973997f36a63885a9792e678d747625d288"
+  ]
+}

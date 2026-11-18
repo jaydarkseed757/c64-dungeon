@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+.pytest_cache/
+# Generated (reproducible with `make dataset`, `make train`, `make convert`)
+datasets/processed/*.jsonl
+datasets/training/
+datasets/validation/
+*.npz
+models/checkpoints/
+# Third-party study checkouts are cloned separately (see reference/README.md)
+reference/*/
+engine/build/
+terminal/build/
+game/build/
+# Local only
+CLAUDE.md
+.DS_Store
+*.lbl

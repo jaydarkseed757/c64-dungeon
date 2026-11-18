@@ -1,0 +1,463 @@
+# DM64 phrase bank v2 additions: merged onto phrasebank.yaml (v1) by
+#   tools/dataset_generator.py --extra datasets/raw/phrasebank_v2_additions.yaml --tag v2
+#
+# Provenance: original text written for this project by Claude (an AI model),
+# 2026-11-17. No text copied from games, books or other datasets.
+#
+# Merge rules: a list here is appended to the v1 list of the same name (or creates
+# a new rule). act_* entries add alternatives per outcome. task_weights replaces the
+# generator's task mix.
+#
+# Consistency rule (the narrator must never contradict the game): room text never
+# names monsters, items or exits that are not in the context; combat text never
+# states numbers; kill text never promises loot.
+
+task_weights: {ROOM: 0.20, MONSTER: 0.10, TREASURE: 0.10, NPC: 0.07, QUEST: 0.05, EVENT: 0.06,
+               COMBAT: 0.14, ACTION: 0.16, FREE: 0.12}
+
+# ---------------------------------------------------------------- general
+dark: [lightless, sooty, dusky, pitch-dark]
+old: [age-old, mouldering, weathered, long-lost]
+cold: [chilly, frigid, raw, bone-cold]
+quiet: [soundless, muffled, deathly still]
+you_see: [you can make out, your torch reveals, ahead you see, the light falls on]
+air: [the cold air, the heavy air, the thick air, the musty air]
+smells: [stinks of, hangs heavy with, is sour with, tastes of]
+odor: [old blood, bat dung, wet earth, candle wax, mildew, brine, ash, rotten wood]
+sound: [a stone clatters in the dark, rats scratch behind the walls, chains clink somewhere far off, the wind sighs through cracks, your torch hisses and spits, a faint echo answers your steps, something breathes in the dark, dust trickles from above]
+
+# ---------------------------------------------------------------- locations
+loc_crypt: [musty, sealed, grim, bone-strewn]
+loc_cavern: [cold, cramped, glistening, mossy]
+loc_keep: [war-torn, blackened, shattered, gloomy]
+loc_sewer: [stinking, dripping, sludgy, rank]
+loc_temple: [holy, desecrated, gilded, ruined]
+loc_mine: [dark, sooty, propped, flooded]
+loc_tower: [lonely, crooked, stormy, tall]
+loc_labyrinth: [winding, baffling, shifting, tangled]
+
+locname_crypt: [vault, ossuary, barrow]
+locname_cavern: [hollow, chasm, underground]
+locname_keep: [stronghold, citadel, ruin]
+locname_sewer: [culvert, tunnels, waterway]
+locname_temple: [chapel, church, cloister]
+locname_mine: [pit, shaft, quarry]
+locname_tower: [tower, keep tower, belfry]
+locname_labyrinth: [maze, warrens, passages]
+
+# ---------------------------------------------------------------- rooms
+room_corridor:
+  - "the passage narrows until the walls brush your shoulders."
+  - "a {cold} corridor runs on. {sound}."
+  - "this {LOC} hallway is lined with empty torch brackets."
+  - "the corridor slopes gently down into the {LOCNAME}."
+  - "puddles cover the floor of this {dark} passage."
+  - "a long hall of rough stone stretches into the gloom."
+  - "the tunnel turns sharply here. {air} {smells} {odor}."
+room_burial_chamber:
+  - "stone lids lie cracked atop the coffins in this tomb."
+  - "the dead rest in rows here, wrapped in rotted cloth."
+  - "a {cold} burial chamber. names are carved above each niche."
+  - "skulls stare from the walls of this {LOC} charnel room."
+  - "this chamber of the dead is {quiet}. dust coats everything."
+  - "faded paint on the coffins shows long-dead nobles."
+room_treasure_room:
+  - "a {LOC} strongroom, its walls lined with empty shelves."
+  - "old coins crunch underfoot in this hidden hoard room."
+  - "this vault was built to hold riches. a few still remain."
+  - "the glint of metal catches your eye in this {dark} room."
+  - "strongboxes lie smashed open across this treasure room."
+room_lair:
+  - "a nest of rags and bones fills one corner of this den."
+  - "the stench here is terrible. something makes its home here."
+  - "this {dark} lair is littered with the remains of meals."
+  - "deep scratches mark the floor of this {LOC} den."
+  - "fur and filth carpet this cramped and stinking lair."
+room_library:
+  - "rows of shelves sag under the weight of mouldering books."
+  - "a reading desk stands here, a dry inkwell upon it."
+  - "loose pages drift across the floor of this {old} library."
+  - "this {LOC} archive smells of dust and old paper."
+  - "the books here are chained to their shelves."
+room_armory:
+  - "empty racks line this {dark} armory. only rust remains."
+  - "a broken forge sits cold in the corner of this armory."
+  - "old armor stands hollow on wooden posts along the walls."
+  - "this {LOC} armory once held weapons for a whole army."
+  - "notched blades and split shields lie heaped by the door."
+room_secret_chamber:
+  - "a narrow gap in the wall leads into a forgotten room."
+  - "this hidden chamber was sealed long ago. the air is stale."
+  - "no footprints mar the dust of this {quiet} secret room."
+  - "a hidden study, its desk still covered in old notes."
+  - "the false wall swings shut behind you. a secret room."
+room_trap_room:
+  - "faint grooves cross the floor of this {LOC} chamber."
+  - "old bloodstains mark the stones near the center of the room."
+  - "the walls here are pierced with rows of tiny holes."
+  - "something about this {dark} room makes your skin crawl."
+  - "a skeleton lies pinned to the wall. this room is not safe."
+room_boss_room:
+  - "a great {LOC} chamber, its ceiling lost in shadow."
+  - "this vast hall is scarred by fire and old battles."
+  - "broken weapons of fallen heroes lie scattered across the hall."
+  - "a raised dais rises at the far end of this {dark} hall."
+  - "the air in this enormous chamber is heavy with dread."
+room_magic_chamber:
+  - "a circle of silver is set into the floor of this room."
+  - "strange symbols shift and glow on the {LOC} walls."
+  - "the air smells of lightning in this arcane chamber."
+  - "crystals set in the walls pulse with a soft light."
+  - "a summoning circle, half scrubbed away, marks the floor."
+room_shrine:
+  - "a stone shrine stands here, its idol worn smooth."
+  - "melted candles cover the steps of this {old} shrine."
+  - "a quiet shrine to a forgotten saint. dried flowers lie here."
+  - "this {dark} shrine is carved with praying figures."
+  - "an old shrine, its offering bowl long empty."
+room_prison:
+  - "empty manacles dangle from the walls of this {cold} cell."
+  - "a row of cells stretches away, their doors rusted open."
+  - "this {LOC} prison stinks of old straw and despair."
+  - "names and prayers are scratched into the cell walls."
+  - "a jailer's stool sits beside a ring of empty cells."
+room_stairs:
+  - "a narrow stair winds down into the {LOCNAME}."
+  - "the steps here are worn hollow by countless feet."
+  - "a stairwell drops into darkness. {air} rises from below."
+  - "crumbling stairs lead down. watch your footing."
+  - "a {dark} stairway spirals into the depths."
+room_hall:
+  - "a long table runs the length of this {dark} hall."
+  - "this {LOC} hall echoes with every step you take."
+  - "tattered tapestries hang from the walls of this great hall."
+  - "a cold hearth fills one wall of this wide hall."
+  - "the roof of this {old} hall has partly fallen in."
+
+# ---------------------------------------------------------------- objects
+obj_door: [a door of black iron, a warped wooden door, a door carved with runes, a low arched door]
+obj_chest: [a chest bound in iron, a rotting sea chest, a carved wooden chest]
+obj_sarcophagus: [a marble sarcophagus, a plain stone coffin, a sarcophagus carved with a knight]
+obj_altar: [an altar of white stone, a bloodstained altar, an altar draped in rags]
+obj_statue: [a statue of a weeping woman, a statue of a fallen king, a mossy statue]
+obj_lever: [a lever of black iron, a stiff lever, a lever wrapped in chain]
+obj_fountain: [a cracked fountain, a fountain choked with moss, a fountain of clear water]
+obj_bookshelf: [a dusty bookshelf, a shelf of rotting books, a leaning bookshelf]
+obj_bones: [a heap of skulls, the bones of an adventurer, a scatter of bones]
+obj_torch: [a sputtering torch, a torch in a rusty sconce, a cold torch]
+obj_weapon_rack: [a rack of broken swords, an old spear rack, a dusty weapon rack]
+obj_pit: [a gaping pit, a pit that drops into blackness, a narrow pit]
+obj_gate: [a rusted gate, a gate of iron bars, a heavy portcullis]
+obj_mirror: [a black mirror, a mirror in a gilded frame, a fogged mirror]
+obj_brazier: [an iron brazier, a brazier full of ash, a tall brazier]
+obj_throne: [a crumbling throne, a throne of rusted iron, a high-backed throne]
+
+see_obj:
+  - "{OBJ} stands in the middle of the room."
+  - "your light falls on {OBJ}."
+  - "near the wall is {OBJ}."
+  - "{OBJ} sits half hidden in the gloom."
+see_obj2:
+  - "{OBJ} stands here, and beyond it {OBJ2}."
+  - "your light reveals {OBJ} and {OBJ2}."
+
+# ---------------------------------------------------------------- monsters
+mon_skeleton: [a grinning skeleton, a skeleton warrior, a crumbling skeleton]
+mon_goblin: [a sly goblin, a goblin raider, a wart-faced goblin]
+mon_orc: [a brutish orc, an orc warrior, a one-eyed orc]
+mon_spider: [a huge spider, a black spider, a spider as big as a dog]
+mon_zombie: [a bloated zombie, a groaning zombie, a walking corpse]
+mon_troll: [a hulking troll, a mossy troll, a cave troll]
+mon_dark_mage: [a cloaked mage, a sinister wizard, a dark sorcerer]
+mon_dragon: [a black dragon, a scaled dragon, a vast dragon]
+mon_rat: [a fat rat, a filthy rat, a rat with red eyes]
+mon_bat: [a huge bat, a vampire bat, a swooping bat]
+
+monshort_skeleton: [skeleton, bones]
+monshort_goblin: [goblin, wretch]
+monshort_orc: [orc, brute]
+monshort_spider: [spider, crawler]
+monshort_zombie: [zombie, corpse]
+monshort_troll: [troll, brute]
+monshort_dark_mage: [mage, wizard]
+monshort_dragon: [dragon, wyrm]
+monshort_rat: [rat, vermin]
+monshort_bat: [bat, bat]
+
+mondesc_skeleton:
+  - "{MON} steps out of an alcove, bones creaking."
+  - "{MON} raises a cracked shield and advances."
+  - "{MON} turns its skull toward you with a dry rattle."
+mondesc_goblin:
+  - "{MON} jabs a rusty spear in your direction."
+  - "{MON} cackles and darts behind a pillar."
+  - "{MON} shrieks a warning to its friends."
+mondesc_orc:
+  - "{MON} spits on the floor and grins."
+  - "{MON} bangs its sword against its shield."
+  - "{MON} charges out of the dark, bellowing."
+mondesc_spider:
+  - "{MON} scuttles across the wall toward you."
+  - "{MON} rears up, venom dripping from its fangs."
+  - "{MON} waits in the center of a vast web."
+mondesc_zombie:
+  - "{MON} turns its blank eyes on you and groans."
+  - "{MON} staggers out of the shadows, arms outstretched."
+  - "{MON} shuffles toward you, trailing grave dirt."
+mondesc_troll:
+  - "{MON} rises from a heap of bones and roars."
+  - "{MON} swings a tree-trunk club in a lazy arc."
+  - "{MON} bares its yellow tusks and lumbers closer."
+mondesc_dark_mage:
+  - "{MON} laughs softly and lifts a pale hand."
+  - "{MON} traces a burning sigil in the air."
+  - "{MON} steps from the shadows, robes whispering."
+mondesc_dragon:
+  - "{MON} lowers its great head and hisses."
+  - "{MON} rumbles deep in its chest. the ground shakes."
+  - "{MON} sweeps its tail across the hoard and glares at you."
+mondesc_rat:
+  - "{MON} hisses from a pile of rubbish."
+  - "{MON} creeps closer, tail lashing."
+  - "{MON} gnaws on an old bone, then looks at you."
+mondesc_bat:
+  - "{MON} dives at your face, wings beating."
+  - "{MON} drops from the ceiling with a screech."
+  - "{MON} circles overhead, then swoops."
+
+mst_healthy: [it shows no sign of weakness., it looks ready for a long fight., it moves with deadly speed.]
+mst_wounded: [blood runs from its wounds., it is hurt but still dangerous., it favors one side.]
+mst_dying: [it sways on its feet., "one more blow should end it.", it is almost spent.]
+mst_dead: [it is dead., it will trouble no one again., it lies broken on the stones.]
+
+see_mon:
+  - "{MON} blocks the way ahead."
+  - "{MON} turns toward you."
+  - "something moves. it is {MON}."
+  - "{MON} waits in the dark."
+
+# ---------------------------------------------------------------- items
+item_gold: [a stack of gold coins, a few gold coins, a sack of gold]
+item_potion: [a green potion, a stoppered flask, a potion in a blue bottle]
+item_sword: [a broadsword, a short sword, a knight's sword]
+item_axe: [a battle axe, a hand axe, a double-bladed axe]
+item_mace: [a flanged mace, a stone mace, a war mace]
+item_dagger: [a curved dagger, a rusty dagger, a silver dagger]
+item_bow: [a long bow, a black bow, an elven bow]
+item_shield: [a kite shield, a wooden shield, an iron shield]
+item_armor: [a coat of mail, a leather jerkin, a suit of plate]
+item_helm: [a steel helm, a leather cap, a battered helm]
+item_key: [a rusty key, a silver key, a large iron key]
+item_ring: [a plain band, a ring of black iron, a twisted ring]
+item_amulet: [a bone amulet, a silver amulet, a holy symbol]
+item_scroll: [a rolled scroll, a scroll tied with ribbon, a brittle scroll]
+item_wand: [a thin wand, a wand of bone, an oak wand]
+item_gem: [an emerald, a dark opal, a cut diamond]
+item_map: [a crumpled map, a map drawn in blood, a scrap of map]
+
+itemflair_gold: [the coins bear a forgotten king's face., it is heavy in your hand., it glitters in the torchlight.]
+itemflair_potion: [it glows faintly., it smells sweet., the cork is sealed with wax.]
+itemflair_sword: [the hilt is wrapped in old leather., it is notched but sound., it gleams despite its age.]
+itemflair_axe: [its haft is wrapped in iron., the edge is still sharp., it feels good in your grip.]
+itemflair_mace: [its head is heavy iron., it is crude but strong., it could crack a helm.]
+itemflair_dagger: [the point is needle sharp., it is perfectly balanced., its hilt is set with a stone.]
+itemflair_bow: [it bends easily in your hands., the wood is smooth and dark., it is a hunter's weapon.]
+itemflair_shield: [it bears a faded crest., it is scarred by many blows., the straps are still good.]
+itemflair_armor: [the rings are only a little rusty., it smells of old sweat., it is heavy but strong.]
+itemflair_helm: [a dent shows it has seen battle., it has a narrow visor., it is lined with felt.]
+itemflair_key: [it is old and ornate., a tag on it is too faded to read., it is cold as ice.]
+itemflair_ring: [a tiny rune is carved inside., it fits your finger perfectly., it gleams oddly.]
+itemflair_amulet: [it is warm against your skin., a gem in its center flickers., it hangs from a fine chain.]
+itemflair_scroll: [the seal is unbroken., strange letters cover it., it smells of smoke.]
+itemflair_wand: [it hums when you hold it., its tip glows faintly., it is light as a feather.]
+itemflair_gem: [it sparkles even in the dark., it is flawless., it is the size of an egg.]
+itemflair_map: [the ink is faded but legible., it marks a hidden door., a skull is drawn in one corner.]
+
+# ---------------------------------------------------------------- treasure task
+treasure_found:
+  - "you open {OBJ} and find {ITEM}. {ITEMFLAIR}"
+  - "tucked away in {OBJ} is {ITEM}. {ITEMFLAIR}"
+  - "your hand closes on {ITEM} inside {OBJ}. {ITEMFLAIR}"
+treasure_found_noobj:
+  - "something glints in the dust: {ITEM}. {ITEMFLAIR}"
+  - "you spot {ITEM} among the rubble. {ITEMFLAIR}"
+  - "lying in a corner is {ITEM}. {ITEMFLAIR}"
+treasure_empty:
+  - "{OBJ} holds nothing but cobwebs."
+  - "you search {OBJ}. it was looted long ago."
+  - "you find only rot and dust in {OBJ}."
+treasure_trap:
+  - "you touch {OBJ} and a blade springs out!"
+  - "{OBJ} hisses as poison gas spills out!"
+  - "a trap in {OBJ} snaps shut on your fingers!"
+
+# ---------------------------------------------------------------- actions
+act_look:
+  - success: ["you pause and look around. {air} {smells} {odor}.", "you hold up your light and look about.", "you listen and look. {sound}."]
+act_examine:
+  - success: ["you look closely at {OBJ}. it has seen better days.", "{OBJ} is covered in old scratches and stains.", "you run a hand over {OBJ}. it is cold."]
+    nothing: ["{OBJ} is just what it seems.", "you find nothing unusual about {OBJ}."]
+act_open:
+  - success: ["you push {OBJ} open. it moves easily.", "{OBJ} creaks open on old hinges.", "you force {OBJ} open."]
+    locked: ["{OBJ} is locked. it will not open without a key.", "you rattle {OBJ}. it is firmly locked.", "a heavy lock holds {OBJ} shut."]
+    fail: ["{OBJ} is jammed and will not open.", "you heave at {OBJ}, but it holds fast."]
+    trap: ["you open {OBJ} and a spike shoots out!", "{OBJ} opens and a puff of poison bursts out!"]
+    empty: ["{OBJ} opens, but nothing lies within.", "inside {OBJ} there is only dust."]
+act_take:
+  - success: ["you pick up {ITEM} and stow it away.", "you take {ITEM}. {ITEMFLAIR}", "you add {ITEM} to your pack."]
+    fail: ["your pack is too full for anything more.", "there is no room left in your pack."]
+act_search:
+  - found: ["you search the shadows and find {ITEM}.", "under a pile of rubble lies {ITEM}.", "in a crack in the wall you find {ITEM}."]
+    nothing: ["you search every corner but find nothing.", "you search the room. nothing of value remains.", "your search finds nothing but rat droppings."]
+    trap: ["your hand trips a hidden wire. a dart strikes you!", "a stone shifts as you search. something stabs you!"]
+act_push:
+  - success: ["{OBJ} grinds back and a hidden gap opens.", "you put your shoulder to {OBJ}. it moves!"]
+    fail: ["{OBJ} is far too heavy to move.", "you push hard, but {OBJ} will not shift."]
+act_pull:
+  - success: ["{OBJ} moves with a loud clank. a grinding sound follows.", "you pull {OBJ}. a hidden door slides open."]
+    fail: ["{OBJ} will not move.", "you tug at {OBJ}, but nothing happens."]
+    trap: ["you pull {OBJ} and a stone falls from the ceiling!", "{OBJ} snaps back and darts fly from the walls!"]
+act_read:
+  - success: ["the words warn of a guardian below.", "you read of a king buried with his gold.", "the writing tells of a door that opens to the brave."]
+    fail: ["the page crumbles as you try to read it.", "the letters are too worn to make out."]
+act_drink:
+  - success: ["you drink. your wounds close and your head clears.", "the potion burns going down, then heals.", "you drink it down. new strength fills you."]
+    fail: ["the drink is bitter and makes you retch.", "you drink. it tastes of mud and rot."]
+act_use:
+  - success: ["{ITEM} does its work.", "you use {ITEM}. something gives way.", "you use {ITEM} on {OBJ}. it works."]
+    fail: ["{ITEM} is of no use here.", "you try {ITEM} on {OBJ}, but nothing happens."]
+act_rest:
+  - success: ["you rest in silence. your strength returns.", "you close your eyes for a while. no one disturbs you.", "you rest and tend your wounds."]
+    fail: ["a sound in the dark keeps you from resting.", "you are too uneasy to rest here."]
+act_enter:
+  - success: ["you step carefully into the room.", "you enter. {air} {smells} {odor}.", "you walk in, every sense alert."]
+act_talk:
+  - nothing: ["your voice echoes back at you.", "you call out. no one answers."]
+
+# ---------------------------------------------------------------- combat
+combat_hit:
+  - "your blade bites into the {MONSHORT}. {MST}"
+  - "you land a solid blow on {MON}. {MST}"
+  - "the {MONSHORT} grunts as you strike it. {MST}"
+combat_crit:
+  - "a crushing blow! the {MONSHORT} staggers back. {MST}"
+  - "you strike with all your might! {MST}"
+  - "a savage hit tears into the {MONSHORT}. {MST}"
+combat_miss:
+  - "the {MONSHORT} twists away from your blow."
+  - "you strike only air."
+  - "your attack goes wide."
+combat_killed:
+  - "the {MONSHORT} gives a final cry and falls still."
+  - "you cut down the {MONSHORT}. it does not rise."
+  - "the {MONSHORT} crumples to the floor, defeated."
+  - "one last blow, and the {MONSHORT} is no more."
+combat_hurt_high:
+  - "the {MONSHORT} catches you a glancing blow."
+  - "the {MONSHORT} hits you. it stings, but you stand firm."
+combat_hurt_mid:
+  - "the {MONSHORT} strikes you. blood runs down your arm."
+  - "a heavy blow from the {MONSHORT} knocks you back."
+combat_hurt_low:
+  - "the {MONSHORT} hits you again. your vision blurs!"
+  - "you are bleeding badly. the {MONSHORT} closes in!"
+combat_flee_success:
+  - "you break away and flee. the {MONSHORT} loses you."
+  - "you run, and the sounds of the {MONSHORT} fade behind you."
+combat_flee_fail:
+  - "you turn to run, but the {MONSHORT} is faster!"
+  - "there is no escape. the {MONSHORT} is upon you."
+
+# ---------------------------------------------------------------- npcs
+npc_hermit: [a hermit in rags, a bent old hermit]
+npc_prisoner: [a ragged prisoner, a pale prisoner]
+npc_ghost: [a mournful ghost, the ghost of a knight]
+npc_merchant: [a tired merchant, a cheerful trader]
+npc_priest: [a grim priest, a priest in torn robes]
+npc_dwarf: [a dwarf with a lantern, a bearded dwarf]
+
+npcintro:
+  - "{NPC} watches you warily."
+  - "{NPC} turns to face you."
+  - "you meet {NPC}."
+npcsay_friendly:
+  - "\"well met. sit, and share my fire.\""
+  - "\"you look tired, friend. be careful ahead.\""
+  - "\"it is good to see a living face down here.\""
+npcsay_afraid:
+  - "\"you are not one of them, are you?\""
+  - "\"keep your voice down, or they will hear!\""
+  - "\"i only want to go home!\""
+npcsay_hostile:
+  - "\"you will find nothing here but death.\""
+  - "\"go away, thief.\""
+  - "\"one more step and i will strike you down.\""
+
+# ---------------------------------------------------------------- quests
+quest_find_relic:
+  - "\"an ancient relic was lost in the depths. find it.\""
+  - "\"bring me the relic from below, and you will be rewarded.\""
+quest_slay_beast:
+  - "\"a monster stalks the halls below. end it.\""
+  - "\"slay the beast that hunts us, and i will pay you well.\""
+quest_rescue:
+  - "\"my daughter is held in the dungeon. bring her back.\""
+  - "\"save the prisoners below before it is too late.\""
+quest_escape:
+  - "\"we must find a way out before the dark takes us.\""
+  - "\"the stairs up have fallen. find another way.\""
+quest_lift_curse:
+  - "\"an evil spell binds this place. undo it.\""
+  - "\"break the curse, and the dead will rest.\""
+questmon:
+  - "\"take care. {MON} guards the depths.\""
+
+# ---------------------------------------------------------------- environment
+env_drip: ["drops fall from the ceiling with a steady tick.", "water trickles down the walls.", "a puddle ripples as a drop falls."]
+env_wind: ["a gust of cold air nearly puts out your torch.", "the wind carries a faint smell of rain.", "a breeze stirs the dust around your feet."]
+env_rumble: ["the walls shudder. small stones rain down.", "a low rumble shakes the floor.", "somewhere deep below, rock grinds on rock."]
+env_scream: ["a scream tears through the silence.", "a long wail fades into the dark.", "a cry of pain echoes from far off."]
+env_chant: ["low voices chant somewhere beneath you.", "a slow chant echoes through the halls.", "chanting rises, then falls silent."]
+env_smell: ["the air is foul with the reek of death.", "a sour smell of decay drifts by.", "the smell of burning reaches you."]
+env_light: ["a cold blue light flickers in the distance.", "a faint glow pulses behind the walls.", "pale light seeps up through the floor."]
+env_cold: ["a sudden chill makes you shiver.", "ice forms on the walls around you.", "the cold bites through your clothes."]
+
+# ---------------------------------------------------------------- free prompts (typed in the AI terminal)
+free_room_prompt:
+  - "describe this place"
+  - "look around"
+  - "what is in this room"
+  - "describe a room"
+  - "describe a dark dungeon"
+  - "what do i see here"
+  - "describe the dungeon"
+  - "describe a {LOCNAME}"
+  - "where am i now"
+  - "tell me about the room"
+  - "show me the room"
+  - "describe the {LOC} {LOCNAME}"
+  - "what does this room look like"
+  - "describe an old crypt"
+  - "describe a cave"
+  - "describe a hall"
+free_monster_prompt:
+  - "what monster is that"
+  - "describe the monster"
+  - "describe the {MONSHORT}"
+  - "who is there"
+  - "what attacks me"
+  - "what is coming"
+  - "describe a monster"
+  - "what creature is here"
+free_treasure_prompt:
+  - "describe the treasure"
+  - "what did i find"
+  - "describe some loot"
+  - "is there treasure here"
+  - "what is inside"
+free_event_prompt:
+  - "what was that"
+  - "what is that sound"
+  - "what do i smell"
+  - "what happens now"
+  - "what is going on"

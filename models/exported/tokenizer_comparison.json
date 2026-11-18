@@ -1,0 +1,380 @@
+{
+  "char": {
+    "model": "baseline",
+    "package_bytes": 233216,
+    "params": 217984,
+    "nats_per_char": {
+      "float": 0.0574,
+      "int": 0.0575
+    },
+    "teacher_forced": {
+      "examples": 100,
+      "positions": 7115,
+      "top1_agreement": 0.998,
+      "float_loss": 0.0574,
+      "int_loss": 0.0575,
+      "int_tokens_per_second_python": 263.7
+    },
+    "greedy_response_exact_match": "25/30",
+    "greedy_chars_per_token": 1.0,
+    "vice": {
+      "runs": [
+        {
+          "ctx": [
+            "TASK:ACTION",
+            "OBJ:DOOR",
+            "ACT:OPEN",
+            "OUT:LOCKED"
+          ],
+          "text": "A heavy oak door is locked tight.",
+          "matches_reference": true,
+          "status": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "cycles": 2022886357,
+          "chars": 33,
+          "cycles_per_char": 61299587,
+          "tokens": 40
+        },
+        {
+          "ctx": [
+            "TASK:ROOM",
+            "LOC:CRYPT",
+            "ROOM:BURIAL_CHAMBER"
+          ],
+          "text": "You enter a burial chamber. Dust lies thick on the dead.",
+          "matches_reference": true,
+          "status": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "cycles": 3279245493,
+          "chars": 56,
+          "cycles_per_char": 58557955,
+          "tokens": 62
+        },
+        {
+          "ctx": [
+            "TASK:MONSTER",
+            "LOC:CAVERN",
+            "MON:ORC",
+            "MST:WOUNDED"
+          ],
+          "text": "A scarred orc blocks the way, tusks bared. It is wounded and angry.",
+          "matches_reference": true,
+          "status": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "cycles": 4006936633,
+          "chars": 67,
+          "cycles_per_char": 59805024,
+          "tokens": 74
+        },
+        {
+          "ctx": [
+            "TASK:TREASURE",
+            "OBJ:CHEST",
+            "ITEM:SWORD",
+            "OUT:FOUND"
+          ],
+          "text": "Inside a battered chest you find a rusty sword. It balances well in the hand.",
+          "matches_reference": true,
+          "status": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "cycles": 4618879171,
+          "chars": 77,
+          "cycles_per_char": 59985444,
+          "tokens": 84
+        }
+      ],
+      "cycles_per_char": 59776599,
+      "note": "cycles corrected for 32-bit CIA counter wrap"
+    },
+    "samples": [
+      {
+        "ctx": [
+          "TASK:ROOM",
+          "LOC:LABYRINTH",
+          "ROOM:SHRINE"
+        ],
+        "int_greedy": "a small shrine stands here, its candles long cold.",
+        "int_topk8_t0.8": "a small shrine stands here, its candles long cold."
+      },
+      {
+        "ctx": [
+          "TASK:ROOM",
+          "LOC:CRYPT",
+          "ROOM:ARMORY",
+          "OBJ:ALTAR",
+          "OBJ:GATE",
+          "HP:MID",
+          "LVL:LOW"
+        ],
+        "int_greedy": "dented shields and broken blades litter the dusty armory. here are a cracked altar and a barred gate.",
+        "int_topk8_t0.8": "you find an old armory, racks of spears long gone to rust. you spot a cracked altar and a barred gate."
+      },
+      {
+        "ctx": [
+          "TASK:MONSTER",
+          "LOC:LABYRINTH",
+          "MON:ZOMBIE",
+          "MST:HEALTHY"
+        ],
+        "int_greedy": "a shambling corpse lurches forward, moaning and reaching. it seems unhurt.",
+        "int_topk8_t0.8": "a shambling corpse lurches forward, moaning and reaching."
+      },
+      {
+        "ctx": [
+          "TASK:ROOM",
+          "LOC:LABYRINTH",
+          "ROOM:PRISON",
+          "LVL:MID"
+        ],
+        "int_greedy": "rusted cells line this dark prison block.",
+        "int_topk8_t0.8": "iron bars and old straw fill this foul jail."
+      },
+      {
+        "ctx": [
+          "TASK:ROOM",
+          "LOC:CRYPT",
+          "ROOM:MAGIC_CHAMBER",
+          "MON:SPIDER",
+          "LVL:MID"
+        ],
+        "int_greedy": "a ring of blue fire burns without fuel in the center. a bloated spider stirs in the dark.",
+        "int_topk8_t0.8": "a ring of blue fire burns without fuel in the center. a bloated spider lurks here."
+      },
+      {
+        "ctx": [
+          "TASK:ROOM",
+          "LOC:CRYPT",
+          "ROOM:STAIRS",
+          "LVL:HIGH"
+        ],
+        "int_greedy": "steep stairs lead deeper into the crypt.",
+        "int_topk8_t0.8": "steep stairs lead deeper into the catacomb."
+      },
+      {
+        "ctx": [
+          "TASK:ROOM",
+          "LOC:CRYPT",
+          "ROOM:SHRINE",
+          "MON:TROLL"
+        ],
+        "int_greedy": "faded offerings lie before a cracked idol. a massive troll lurks here.",
+        "int_topk8_t0.8": "you find a crumbling shrine to a god whose name is lost. a warty troll lurks here."
+      },
+      {
+        "ctx": [
+          "TASK:ROOM",
+          "LOC:CAVERN",
+          "ROOM:SECRET_CHAMBER",
+          "ENV:CHANT"
+        ],
+        "int_greedy": "a concealed chamber opens before you, quiet and close. a low chant rises and falls in the dark.",
+        "int_topk8_t0.8": "a hidden chamber lies behind the wall, untouched for ages. a low chant rises and falls in the dark."
+      }
+    ]
+  },
+  "bpe72": {
+    "model": "baseline_bpe72",
+    "package_bytes": 237312,
+    "params": 221760,
+    "nats_per_char": {
+      "float": 0.0561,
+      "int": 0.0562
+    },
+    "teacher_forced": {
+      "examples": 100,
+      "positions": 4251,
+      "top1_agreement": 0.996,
+      "float_loss": 0.0939,
+      "int_loss": 0.094,
+      "int_tokens_per_second_python": 334.9
+    },
+    "greedy_response_exact_match": "26/30",
+    "greedy_chars_per_token": 1.66,
+    "vice": {
+      "runs": [
+        {
+          "ctx": [
+            "TASK:ACTION",
+            "OBJ:DOOR",
+            "ACT:OPEN",
+            "OUT:LOCKED"
+          ],
+          "text": "You pull at an iron-bound door but it will not budge. It is locked.",
+          "matches_reference": true,
+          "status": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "cycles": 2348915010,
+          "chars": 67,
+          "cycles_per_char": 35058433,
+          "tokens": 45
+        },
+        {
+          "ctx": [
+            "TASK:ROOM",
+            "LOC:CRYPT",
+            "ROOM:BURIAL_CHAMBER"
+          ],
+          "text": "You enter a burial chamber. Dust lies thick on the dead.",
+          "matches_reference": true,
+          "status": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "cycles": 1822267681,
+          "chars": 56,
+          "cycles_per_char": 32540494,
+          "tokens": 36
+        },
+        {
+          "ctx": [
+            "TASK:MONSTER",
+            "LOC:CAVERN",
+            "MON:ORC",
+            "MST:WOUNDED"
+          ],
+          "text": "A scarred orc blocks the way, tusks bared. It is wounded and angry.",
+          "matches_reference": true,
+          "status": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "cycles": 2283127607,
+          "chars": 67,
+          "cycles_per_char": 34076531,
+          "tokens": 44
+        },
+        {
+          "ctx": [
+            "TASK:TREASURE",
+            "OBJ:CHEST",
+            "ITEM:SWORD",
+            "OUT:FOUND"
+          ],
+          "text": "Inside a small locked chest you find a rusty sword. It balances well in the hand.",
+          "matches_reference": true,
+          "status": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "cycles": 2858405841,
+          "chars": 81,
+          "cycles_per_char": 35288961,
+          "tokens": 54
+        }
+      ],
+      "cycles_per_char": 34364266,
+      "note": "cycles corrected for 32-bit CIA counter wrap"
+    },
+    "samples": [
+      {
+        "ctx": [
+          "TASK:ROOM",
+          "LOC:LABYRINTH",
+          "ROOM:SHRINE"
+        ],
+        "int_greedy": "a small shrine stands here, its candles long cold.",
+        "int_topk8_t0.8": "a small shrine stands here, its candles long cold."
+      },
+      {
+        "ctx": [
+          "TASK:ROOM",
+          "LOC:CRYPT",
+          "ROOM:ARMORY",
+          "OBJ:ALTAR",
+          "OBJ:GATE",
+          "HP:MID",
+          "LVL:LOW"
+        ],
+        "int_greedy": "you find an old armory, racks of spears long gone to rust. here are a cracked altar and an iron gate.",
+        "int_topk8_t0.8": "this armory still smells of oil and iron. here are a cracked altar and a barred gate."
+      },
+      {
+        "ctx": [
+          "TASK:MONSTER",
+          "LOC:LABYRINTH",
+          "MON:ZOMBIE",
+          "MST:HEALTHY"
+        ],
+        "int_greedy": "a rotting zombie drags itself closer, flesh hanging loose.",
+        "int_topk8_t0.8": "a rotting zombie drags itself closer, flesh hanging loose."
+      },
+      {
+        "ctx": [
+          "TASK:ROOM",
+          "LOC:LABYRINTH",
+          "ROOM:PRISON",
+          "LVL:MID"
+        ],
+        "int_greedy": "rusted cells line this dim prison block.",
+        "int_topk8_t0.8": "iron bars and old straw fill this foul jail."
+      },
+      {
+        "ctx": [
+          "TASK:ROOM",
+          "LOC:CRYPT",
+          "ROOM:MAGIC_CHAMBER",
+          "MON:SPIDER",
+          "LVL:MID"
+        ],
+        "int_greedy": "a ring of blue fire burns without fuel in the center. a bloated spider stirs in the dark.",
+        "int_topk8_t0.8": "a ring of blue fire burns without fuel in the center. a hairy spider watches you from the shadows."
+      },
+      {
+        "ctx": [
+          "TASK:ROOM",
+          "LOC:CRYPT",
+          "ROOM:STAIRS",
+          "LVL:HIGH"
+        ],
+        "int_greedy": "steep stairs lead deeper into the crypt.",
+        "int_topk8_t0.8": "steep stairs lead deeper into the crypt."
+      },
+      {
+        "ctx": [
+          "TASK:ROOM",
+          "LOC:CRYPT",
+          "ROOM:SHRINE",
+          "MON:TROLL"
+        ],
+        "int_greedy": "faded offerings lie before a cracked idol. a warty troll watches you from the shadows.",
+        "int_topk8_t0.8": "you find a crumbling shrine to a god whose name is lost. a warty troll lurks here."
+      },
+      {
+        "ctx": [
+          "TASK:ROOM",
+          "LOC:CAVERN",
+          "ROOM:SECRET_CHAMBER",
+          "ENV:CHANT"
+        ],
+        "int_greedy": "a concealed chamber opens before you, quiet and close. a low chant rises and falls in the dark.",
+        "int_topk8_t0.8": "a concealed chamber opens before you, quiet and close. a low chant rises and falls in the dark."
+      }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+# Bring-up model in the bpe72 lexicon: exercises every engine/terminal path quickly in tests.
+name: bringup_bpe72
+tokenizer: bpe72
+model: {ctx_len: 128, d_model: 32, n_layers: 2, n_heads: 2, d_ff: 64, rms_eps: 1.0e-5}
+data: {train: datasets/training/train.jsonl, val: datasets/validation/val.jsonl}
+train: {seed: 64, steps: 3000, batch: 128, lr: 3.0e-3, min_lr: 3.0e-4, warmup: 200,
+        weight_decay: 0.05, grad_clip: 1.0, log_every: 250, eval_every: 1000}

@@ -1,0 +1,299 @@
+{
+  "checkpoint": "models/checkpoints/bringup/best.pt",
+  "package": "models/exported/bringup.d64ai",
+  "params": 26944,
+  "float_val_loss_full_split": 0.9722,
+  "teacher_forced": {
+    "examples": 60,
+    "positions": 4233,
+    "top1_agreement": 0.9598,
+    "float_loss": 0.9324,
+    "int_loss": 0.9413,
+    "int_tokens_per_second_python": 827.5
+  },
+  "greedy_response_exact_match": "0/20",
+  "int_max_abs": {
+    "matvec_acc": 26235551,
+    "attn_score": 2256725,
+    "attn_acc": 26264537,
+    "residual": 94341
+  },
+  "int_max_bits": {
+    "matvec_acc": 26,
+    "attn_score": 23,
+    "attn_acc": 26,
+    "residual": 18
+  },
+  "samples": [
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:LABYRINTH",
+        "ROOM:SHRINE"
+      ],
+      "prompt": null,
+      "data": "this narrow shrine is hushed. incense still lingers.",
+      "int_greedy": "the shrepin stands in the dark. in the dark.",
+      "float_greedy": "the shrepins in dusters in the dark. in the dark stall stire agome stone air.",
+      "int_topk8_t0.8": "faded shinthing glinks here. silend acine fills low hose."
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CRYPT",
+        "ROOM:ARMORY",
+        "OBJ:ALTAR",
+        "OBJ:GATE",
+        "HP:MID",
+        "LVL:LOW"
+      ],
+      "prompt": null,
+      "data": "you find an old armory, racks of spears long gone to rust. here are a cracked altar and a barred gate.",
+      "int_greedy": "rushined swinds of this old crackss mall tory the stairs. a carrin stard a carved warmor a warded arcked weall.",
+      "float_greedy": "rushined swinds of a still coins the dark. in the all staine. a carrried an a gracked warll braged wall worcke arck.",
+      "int_topk8_t0.8": "shing stall scrickes and iroled stoff to clackst opons. sust stone alt sust crancoed acher a wartcorlinghed."
+    },
+    {
+      "ctx": [
+        "TASK:MONSTER",
+        "LOC:LABYRINTH",
+        "MON:ZOMBIE",
+        "MST:HEALTHY"
+      ],
+      "prompt": null,
+      "data": "a zombie lurches forward, moaning and reaching.",
+      "int_greedy": "a rusty sout chant ises from the depings. it is fresh and eager blood.",
+      "float_greedy": "a relow spring strings out cheller is froung reep. it is fresh and eager for blood.",
+      "int_topk8_t0.8": "the ceant drags clies click is frour at of blow. it limps seemeds from."
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:LABYRINTH",
+        "ROOM:PRISON",
+        "LVL:MID"
+      ],
+      "prompt": null,
+      "data": "rusted cells line this murky prison block.",
+      "int_greedy": "you enter a prones lies beny hide stire stambe stroned of the shadow.",
+      "float_greedy": "you enter a prones lies bentere is his stroomen stringers.",
+      "int_topk8_t0.8": "a mair purccedils bris at the stild his tone chamber."
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CRYPT",
+        "ROOM:MAGIC_CHAMBER",
+        "MON:SPIDER",
+        "LVL:MID"
+      ],
+      "prompt": null,
+      "data": "runes glow faintly on the floor of this cold chamber. a hairy spider stirs in the dark.",
+      "int_greedy": "the combl corcor tones the floor the stire stire acke surnged. a dragom seeps it shadows.",
+      "float_greedy": "roks and bustal comber tone the deep stire stire stirs a the shadows.",
+      "int_topk8_t0.8": "rok. stand iron a buverne of cold stone befful you."
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CRYPT",
+        "ROOM:STAIRS",
+        "LVL:HIGH"
+      ],
+      "prompt": null,
+      "data": "worn stone steps spiral down into the dark.",
+      "int_greedy": "you spide stridergs lin this dark stoorching darks is watch a deade.",
+      "float_greedy": "you spides a stairces lie senglery doips a strings of the dark.",
+      "int_topk8_t0.8": "you find stroug trepps ligsse, a mangor sep boones rumbed."
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CRYPT",
+        "ROOM:SHRINE",
+        "MON:TROLL"
+      ],
+      "prompt": null,
+      "data": "faded offerings lie before a cracked idol. a cave troll stirs in the dark.",
+      "int_greedy": "a small shrine strine lie still coins the dark. in the siles silew. a scawe arke and the dark.",
+      "float_greedy": "a small shrine strine strings in thris in the dark. stally camblere low here. is sever awath a trady cando no.",
+      "int_topk8_t0.8": "you find a low licers the. dumbling of steneths iy cent. staced lon and the shadows."
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CAVERN",
+        "ROOM:SECRET_CHAMBER",
+        "ENV:CHANT"
+      ],
+      "prompt": null,
+      "data": "dust sits undisturbed in this murky hidden vault. you hear voices chanting in a strange tongue.",
+      "int_greedy": "a cosen stin stele covell thinhing this and a tracke ston stone. in a grints the froung tore.",
+      "float_greedy": "a cosen stin stele covell thing this floor tones. it sten a cammbler. it steers it chell.",
+      "int_topk8_t0.8": "a wed cilom consers the floows tones of this. it drip frorsead. a watcher in the stire ching."
+    },
+    {
+      "ctx": [
+        "TASK:NPC",
+        "LOC:CAVERN",
+        "NPC:HERMIT",
+        "MOOD:FRIENDLY"
+      ],
+      "prompt": null,
+      "data": "a ragged hermit looks up at you. \"welcome, traveler. few come this deep.\"",
+      "int_greedy": "a ragged hermit looks up at you. \"take care below. i have seen what lurks the deep.\"",
+      "float_greedy": "a ragged hermit looks up at the shadows. \"tast you ane deep.\"",
+      "int_topk8_t0.8": "an best ompt ouns of here. \"were, soserer. fach ase dleep. chave can beep.\""
+    },
+    {
+      "ctx": [
+        "TASK:TREASURE",
+        "OBJ:CHEST",
+        "ITEM:BOW",
+        "OUT:FOUND"
+      ],
+      "prompt": null,
+      "data": "a hunting bow lies hidden in an old chest. it is finely made.",
+      "int_greedy": "you uncover a burned in a boned a bookend chambler. it is in the deeat.",
+      "float_greedy": "you uncover a burned in a boned a bookend chambler. it is standers it ists a still inght.",
+      "int_topk8_t0.8": "you arnd a blarcks oponenes boned a burnt of still this work."
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CAVERN",
+        "ROOM:SHRINE",
+        "MON:ORC"
+      ],
+      "prompt": null,
+      "data": "you find a crumbling shrine to a god whose name is lost. an orc stirs in the dark.",
+      "int_greedy": "a small shrine strine strings of this hall. drimy still stineth and a cant ilurs.",
+      "float_greedy": "a small shrine strine strings in thris in the dark. in the silen ager stirs in the dark.",
+      "int_topk8_t0.8": "a glith shrine floger dup dark. the ire is tirk. fleas stands marking tron."
+    },
+    {
+      "ctx": [
+        "TASK:MONSTER",
+        "MON:SKELETON",
+        "MST:DYING",
+        "LVL:HIGH"
+      ],
+      "prompt": null,
+      "data": "a rattling skeleton rises from the dust, a rusty blade in hand. it staggers, close to death.",
+      "int_greedy": "a scrouted waterd sombin the closet from to strom. it stand are frorly blow.",
+      "float_greedy": "a scroutted chambering the dustuded fin and a ratngy. it staggers, fresh frorly to death.",
+      "int_topk8_t0.8": "an siton spituriin wormbiing into the cand verer. it blood in to find."
+    },
+    {
+      "ctx": [
+        "TASK:ACTION",
+        "OBJ:DOOR",
+        "ACT:EXAMINE",
+        "OUT:SUCCESS"
+      ],
+      "prompt": null,
+      "data": "up close, a narrow stone door looks recently disturbed.",
+      "int_greedy": "you sturnge atterige dringes a dripps itan book.",
+      "float_greedy": "you examine a ratted spide cracked in this fool frotar.",
+      "int_topk8_t0.8": "a dringest toophly files this fringe."
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:MINE",
+        "ROOM:MAGIC_CHAMBER",
+        "OBJ:THRONE",
+        "HP:HIGH",
+        "LVL:HIGH"
+      ],
+      "prompt": null,
+      "data": "runes glow faintly on the floor of this collapsed chamber. a throne carved from bone waits in the shadows.",
+      "int_greedy": "roks and chamber stal the cover tos the stirces. a turche sturned a thron standing fal thor stand worne wall.",
+      "float_greedy": "roks and chamber stal the cover tos the stirces. a turn stirs a crust thronge to corne.",
+      "int_topk8_t0.8": "roknlia in lombis ff a buroves chamber tone of footain. a strone and close."
+    },
+    {
+      "ctx": [
+        "TASK:NPC",
+        "LOC:TOWER",
+        "NPC:GHOST",
+        "MOOD:FRIENDLY"
+      ],
+      "prompt": null,
+      "data": "a weeping spirit looks up at you. \"rest a moment. the dark is less cruel with company.\"",
+      "int_greedy": "a pale ghost looks plest our the shadows. \"the carent below. i have seen what lurks there.\"",
+      "float_greedy": "a pale ghost looks plest our the shadows. \"therer cave best.\"",
+      "int_topk8_t0.8": "a charckis plit loks up at seles. \"wedwo a it moks the shadows.\""
+    },
+    {
+      "ctx": [
+        "TASK:COMBAT",
+        "MON:RAT",
+        "MST:HEALTHY",
+        "ACT:ATTACK",
+        "OUT:CRIT",
+        "HP:MID"
+      ],
+      "prompt": null,
+      "data": "you find a gap and strike deep. it is fresh and eager for blood.",
+      "int_greedy": "a mighty steor and russ from beepang of finde. it is fresh from shungril fferil ight.",
+      "float_greedy": "a mighty steor and ruts at looks not ead to fight.",
+      "int_topk8_t0.8": "a mighty stein and russ rusts from to figes. it is wounded angry founds."
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:LABYRINTH",
+        "ROOM:LIBRARY"
+      ],
+      "prompt": null,
+      "data": "you enter a library. pages crumble at your touch.",
+      "int_greedy": "scroll lines of the dengerin a books tones and the dark.",
+      "float_greedy": "scroll lines a libroks in the darced lis this arone and stamble.",
+      "int_topk8_t0.8": "scroom aned angail buries a bookelf shepesirs a the dry a mark."
+    },
+    {
+      "ctx": [
+        "TASK:MONSTER",
+        "MON:GOBLIN",
+        "MST:WOUNDED",
+        "HP:MID"
+      ],
+      "prompt": null,
+      "data": "a sneering goblin peers at you, greedy eyes on your purse. it limps but still fights.",
+      "int_greedy": "a goblin grins ort hiseld corpse from blowses, risowing. it is fresh and arry founding binds fights.",
+      "float_greedy": "a goblin grins ort hiseld cort is from seemiththing. it is nearly finis to fight.",
+      "int_topk8_t0.8": "a scriering grinin hiss ortger stcoe dron. it stagers, co this frorling blow."
+    },
+    {
+      "ctx": [
+        "TASK:COMBAT",
+        "MON:SKELETON",
+        "MST:HEALTHY",
+        "ACT:ATTACK",
+        "OUT:HIT",
+        "HP:HIGH",
+        "LVL:HIGH"
+      ],
+      "prompt": null,
+      "data": "you hit the dead thing hard. it is fresh and eager for blood.",
+      "int_greedy": "you blow lands on the dead cand rood. it limps but still fights.",
+      "float_greedy": "you blow lands on the dead cand reep. it looks strong and rangry figght.",
+      "int_topk8_t0.8": "your blow lands on thick mide. it limps sewombing. it is fresh full shunds."
+    },
+    {
+      "ctx": [
+        "TASK:MONSTER",
+        "LOC:CAVERN",
+        "MON:RAT",
+        "MST:HEALTHY",
+        "HP:LOW"
+      ],
+      "prompt": null,
+      "data": "a huge sewer rat sniffs at your boots, whiskers twitching.",
+      "int_greedy": "a giant rat dris ound a ruts cand orts from seeps. it is fresh free.",
+      "float_greedy": "a giant grombing on the deades aged closer from severaly. it bleeeds strong a frorly bout boond.",
+      "int_topk8_t0.8": "a gianth gobling your dries find a ris nearling fily. it seems unhurt."
+    }
+  ]
+}

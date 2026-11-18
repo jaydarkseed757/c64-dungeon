@@ -1,0 +1,469 @@
+{
+  "checkpoint": "/Users/jay/projects/c64-dungeon-master/models/checkpoints/baseline/best.pt",
+  "package": "/Users/jay/projects/c64-dungeon-master/models/exported/baseline.d64ai",
+  "params": 217984,
+  "tokenizer": "char",
+  "nats_per_char": {
+    "float": 0.0574,
+    "int": 0.0575
+  },
+  "greedy_chars_per_token": 1.0,
+  "float_val_loss_full_split": 0.0631,
+  "teacher_forced": {
+    "examples": 100,
+    "positions": 7115,
+    "top1_agreement": 0.998,
+    "float_loss": 0.0574,
+    "int_loss": 0.0575,
+    "int_tokens_per_second_python": 263.7
+  },
+  "greedy_response_exact_match": "25/30",
+  "int_max_abs": {
+    "matvec_acc": 53475608,
+    "attn_score": 1676118,
+    "attn_acc": 55087577,
+    "residual": 639017
+  },
+  "int_max_bits": {
+    "matvec_acc": 27,
+    "attn_score": 22,
+    "attn_acc": 27,
+    "residual": 21
+  },
+  "samples": [
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:LABYRINTH",
+        "ROOM:SHRINE"
+      ],
+      "prompt": null,
+      "data": "this narrow shrine is hushed. incense still lingers.",
+      "int_greedy": "a small shrine stands here, its candles long cold.",
+      "float_greedy": "a small shrine stands here, its candles long cold.",
+      "int_topk8_t0.8": "a small shrine stands here, its candles long cold.",
+      "int_greedy_tokens": 51
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CRYPT",
+        "ROOM:ARMORY",
+        "OBJ:ALTAR",
+        "OBJ:GATE",
+        "HP:MID",
+        "LVL:LOW"
+      ],
+      "prompt": null,
+      "data": "you find an old armory, racks of spears long gone to rust. here are a cracked altar and a barred gate.",
+      "int_greedy": "dented shields and broken blades litter the dusty armory. here are a cracked altar and a barred gate.",
+      "float_greedy": "dented shields and broken blades litter the dusty armory. here are a cracked altar and a barred gate.",
+      "int_topk8_t0.8": "you find an old armory, racks of spears long gone to rust. you spot a cracked altar and a barred gate.",
+      "int_greedy_tokens": 102
+    },
+    {
+      "ctx": [
+        "TASK:MONSTER",
+        "LOC:LABYRINTH",
+        "MON:ZOMBIE",
+        "MST:HEALTHY"
+      ],
+      "prompt": null,
+      "data": "a zombie lurches forward, moaning and reaching.",
+      "int_greedy": "a shambling corpse lurches forward, moaning and reaching. it seems unhurt.",
+      "float_greedy": "a shambling corpse lurches forward, moaning and reaching.",
+      "int_topk8_t0.8": "a shambling corpse lurches forward, moaning and reaching.",
+      "int_greedy_tokens": 75
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:LABYRINTH",
+        "ROOM:PRISON",
+        "LVL:MID"
+      ],
+      "prompt": null,
+      "data": "rusted cells line this murky prison block.",
+      "int_greedy": "rusted cells line this dark prison block.",
+      "float_greedy": "rusted cells line this dark prison block.",
+      "int_topk8_t0.8": "iron bars and old straw fill this foul jail.",
+      "int_greedy_tokens": 42
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CRYPT",
+        "ROOM:MAGIC_CHAMBER",
+        "MON:SPIDER",
+        "LVL:MID"
+      ],
+      "prompt": null,
+      "data": "runes glow faintly on the floor of this cold chamber. a hairy spider stirs in the dark.",
+      "int_greedy": "a ring of blue fire burns without fuel in the center. a bloated spider stirs in the dark.",
+      "float_greedy": "a ring of blue fire burns without fuel in the center. a bloated spider stirs in the dark.",
+      "int_topk8_t0.8": "a ring of blue fire burns without fuel in the center. a bloated spider lurks here.",
+      "int_greedy_tokens": 90
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CRYPT",
+        "ROOM:STAIRS",
+        "LVL:HIGH"
+      ],
+      "prompt": null,
+      "data": "worn stone steps spiral down into the dark.",
+      "int_greedy": "steep stairs lead deeper into the crypt.",
+      "float_greedy": "steep stairs lead deeper into the crypt.",
+      "int_topk8_t0.8": "steep stairs lead deeper into the catacomb.",
+      "int_greedy_tokens": 41
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CRYPT",
+        "ROOM:SHRINE",
+        "MON:TROLL"
+      ],
+      "prompt": null,
+      "data": "faded offerings lie before a cracked idol. a cave troll stirs in the dark.",
+      "int_greedy": "faded offerings lie before a cracked idol. a massive troll lurks here.",
+      "float_greedy": "faded offerings lie before a cracked idol. a massive troll lurks here.",
+      "int_topk8_t0.8": "you find a crumbling shrine to a god whose name is lost. a warty troll lurks here.",
+      "int_greedy_tokens": 71
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CAVERN",
+        "ROOM:SECRET_CHAMBER",
+        "ENV:CHANT"
+      ],
+      "prompt": null,
+      "data": "dust sits undisturbed in this murky hidden vault. you hear voices chanting in a strange tongue.",
+      "int_greedy": "a concealed chamber opens before you, quiet and close. a low chant rises and falls in the dark.",
+      "float_greedy": "a concealed chamber opens before you, quiet and close. a low chant rises and falls in the dark.",
+      "int_topk8_t0.8": "a hidden chamber lies behind the wall, untouched for ages. a low chant rises and falls in the dark.",
+      "int_greedy_tokens": 96
+    },
+    {
+      "ctx": [
+        "TASK:NPC",
+        "LOC:CAVERN",
+        "NPC:HERMIT",
+        "MOOD:FRIENDLY"
+      ],
+      "prompt": null,
+      "data": "a ragged hermit looks up at you. \"welcome, traveler. few come this deep.\"",
+      "int_greedy": "a ragged hermit is here. \"welcome, traveler. few come this deep.\"",
+      "float_greedy": "a ragged hermit is here. \"take care below. i have seen what lurks there.\"",
+      "int_topk8_t0.8": "a ragged hermit steps out of the shadows. \"take care below. i have seen what lurks there.\"",
+      "int_greedy_tokens": 66
+    },
+    {
+      "ctx": [
+        "TASK:TREASURE",
+        "OBJ:CHEST",
+        "ITEM:BOW",
+        "OUT:FOUND"
+      ],
+      "prompt": null,
+      "data": "a hunting bow lies hidden in an old chest. it is finely made.",
+      "int_greedy": "inside an iron chest you find a hunting bow. it is finely made.",
+      "float_greedy": "inside an iron chest you find a hunting bow. it is finely made.",
+      "int_topk8_t0.8": "a hunting bow lies hidden in a small locked chest. it is light and strong.",
+      "int_greedy_tokens": 64
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CAVERN",
+        "ROOM:SHRINE",
+        "MON:ORC"
+      ],
+      "prompt": null,
+      "data": "you find a crumbling shrine to a god whose name is lost. an orc stirs in the dark.",
+      "int_greedy": "a small shrine stands here, its candles long cold. an orc watches you from the shadows.",
+      "float_greedy": "this damp shrine is quiet. incense still lingers. a hulking orc watches you from the shadows.",
+      "int_topk8_t0.8": "a small shrine stands here, its candles long cold. an orc stirs in the dark.",
+      "int_greedy_tokens": 88
+    },
+    {
+      "ctx": [
+        "TASK:MONSTER",
+        "MON:SKELETON",
+        "MST:DYING",
+        "LVL:HIGH"
+      ],
+      "prompt": null,
+      "data": "a rattling skeleton rises from the dust, a rusty blade in hand. it staggers, close to death.",
+      "int_greedy": "a rattling skeleton rises from the dust, a rusty blade in hand. it is nearly finished.",
+      "float_greedy": "a rattling skeleton rises from the dust, a rusty blade in hand. it is nearly finished.",
+      "int_topk8_t0.8": "an armored skeleton rises from the dust, a rusty blade in hand. it staggers, close to death.",
+      "int_greedy_tokens": 87
+    },
+    {
+      "ctx": [
+        "TASK:ACTION",
+        "OBJ:DOOR",
+        "ACT:EXAMINE",
+        "OUT:SUCCESS"
+      ],
+      "prompt": null,
+      "data": "up close, a narrow stone door looks recently disturbed.",
+      "int_greedy": "you study a heavy oak door closely. it is very old.",
+      "float_greedy": "you study a heavy oak door closely. it is very old.",
+      "int_topk8_t0.8": "you study a heavy oak door closely. it is very old.",
+      "int_greedy_tokens": 52
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:MINE",
+        "ROOM:MAGIC_CHAMBER",
+        "OBJ:THRONE",
+        "HP:HIGH",
+        "LVL:HIGH"
+      ],
+      "prompt": null,
+      "data": "runes glow faintly on the floor of this collapsed chamber. a throne carved from bone waits in the shadows.",
+      "int_greedy": "the air crackles in this chamber of strange sigils. you see a throne of black stone against the far wall.",
+      "float_greedy": "the air crackles in this chamber of strange sigils. you see a throne of black stone against the far wall.",
+      "int_topk8_t0.8": "glowing glyphs crawl across the walls of this room. a throne carved from bone waits in the shadows.",
+      "int_greedy_tokens": 106
+    },
+    {
+      "ctx": [
+        "TASK:NPC",
+        "LOC:TOWER",
+        "NPC:GHOST",
+        "MOOD:FRIENDLY"
+      ],
+      "prompt": null,
+      "data": "a weeping spirit looks up at you. \"rest a moment. the dark is less cruel with company.\"",
+      "int_greedy": "a weeping spirit is here. \"welcome, traveler. few come this deep.\"",
+      "float_greedy": "a weeping spirit is here. \"welcome, traveler. few come this deep.\"",
+      "int_topk8_t0.8": "a flickering ghost is here. \"take care below. i have seen what lurks there.\"",
+      "int_greedy_tokens": 67
+    },
+    {
+      "ctx": [
+        "TASK:COMBAT",
+        "MON:RAT",
+        "MST:HEALTHY",
+        "ACT:ATTACK",
+        "OUT:CRIT",
+        "HP:MID"
+      ],
+      "prompt": null,
+      "data": "you find a gap and strike deep. it is fresh and eager for blood.",
+      "int_greedy": "a mighty blow! you smash the rat. it seems unhurt.",
+      "float_greedy": "a mighty blow! you smash the rat. it seems unhurt.",
+      "int_topk8_t0.8": "a mighty blow! you smash the rat. it seems unhurt.",
+      "int_greedy_tokens": 51
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:LABYRINTH",
+        "ROOM:LIBRARY"
+      ],
+      "prompt": null,
+      "data": "you enter a library. pages crumble at your touch.",
+      "int_greedy": "scrolls and tomes lie heaped across a dim reading room.",
+      "float_greedy": "scrolls and tomes lie heaped across a dim reading room.",
+      "int_topk8_t0.8": "scrolls and tomes lie heaped across a black reading room.",
+      "int_greedy_tokens": 56
+    },
+    {
+      "ctx": [
+        "TASK:MONSTER",
+        "MON:GOBLIN",
+        "MST:WOUNDED",
+        "HP:MID"
+      ],
+      "prompt": null,
+      "data": "a sneering goblin peers at you, greedy eyes on your purse. it limps but still fights.",
+      "int_greedy": "a scrawny goblin grins with yellow teeth and draws a jagged knife. it is wounded and angry.",
+      "float_greedy": "a scrawny goblin grins with yellow teeth and draws a jagged knife. it is wounded and angry.",
+      "int_topk8_t0.8": "a goblin peers at you, greedy eyes on your purse. it is wounded and angry.",
+      "int_greedy_tokens": 92
+    },
+    {
+      "ctx": [
+        "TASK:COMBAT",
+        "MON:SKELETON",
+        "MST:HEALTHY",
+        "ACT:ATTACK",
+        "OUT:HIT",
+        "HP:HIGH",
+        "LVL:HIGH"
+      ],
+      "prompt": null,
+      "data": "you hit the dead thing hard. it is fresh and eager for blood.",
+      "int_greedy": "you strike a rattling skeleton. it seems unhurt.",
+      "float_greedy": "you strike a rattling skeleton. it seems unhurt.",
+      "int_topk8_t0.8": "you hit the bony foe hard. it looks strong and ready to fight.",
+      "int_greedy_tokens": 49
+    },
+    {
+      "ctx": [
+        "TASK:MONSTER",
+        "LOC:CAVERN",
+        "MON:RAT",
+        "MST:HEALTHY",
+        "HP:LOW"
+      ],
+      "prompt": null,
+      "data": "a huge sewer rat sniffs at your boots, whiskers twitching.",
+      "int_greedy": "a huge sewer rat scurries out of a crack in the wall. it seems unhurt.",
+      "float_greedy": "a huge sewer rat scurries out of a crack in the wall. it seems unhurt.",
+      "int_topk8_t0.8": "a giant rat squeals and bares its yellow teeth.",
+      "int_greedy_tokens": 71
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CAVERN",
+        "ROOM:LIBRARY",
+        "OBJ:DOOR",
+        "OBJ:BRAZIER",
+        "LVL:LOW"
+      ],
+      "prompt": null,
+      "data": "you enter a library. pages crumble at your touch. you make out a narrow stone door and a smoking brazier.",
+      "int_greedy": "you enter a library. pages crumble at your touch. you see a rotted wooden door and a bronze brazier.",
+      "float_greedy": "you enter a library. pages crumble at your touch. you see a rotted wooden door and a bronze brazier.",
+      "int_topk8_t0.8": "a silent library, its books swollen with damp. you notice a heavy oak door and a cold brazier.",
+      "int_greedy_tokens": 101
+    },
+    {
+      "ctx": [
+        "TASK:FREE"
+      ],
+      "prompt": "tell me about the bat",
+      "data": "a giant bat swoops down from the dark, shrieking. it is fresh and eager for blood.",
+      "int_greedy": "a giant rat scurries out of a crack in the wall. it is wounded and angry.",
+      "float_greedy": "a giant rat scurries out of a crack in the wall. it is wounded and angry.",
+      "int_topk8_t0.8": "a giant rat squeals and bares its yellow teeth. it looks strong and ready to fight.",
+      "int_greedy_tokens": 74
+    },
+    {
+      "ctx": [
+        "TASK:COMBAT",
+        "MON:ORC",
+        "ACT:FLEE",
+        "OUT:SUCCESS",
+        "HP:LOW",
+        "LVL:MID"
+      ],
+      "prompt": null,
+      "data": "you turn and run. the brute does not follow.",
+      "int_greedy": "you escape into the dark, heart pounding.",
+      "float_greedy": "you escape into the dark, heart pounding.",
+      "int_topk8_t0.8": "you turn and run. the brute does not follow.",
+      "int_greedy_tokens": 42
+    },
+    {
+      "ctx": [
+        "TASK:COMBAT",
+        "MON:ORC",
+        "MST:WOUNDED",
+        "ACT:ATTACK",
+        "OUT:HIT",
+        "HP:MID"
+      ],
+      "prompt": null,
+      "data": "you hit the brute hard. it is wounded and angry.",
+      "int_greedy": "you strike a hulking orc. it is wounded and angry.",
+      "float_greedy": "you strike a hulking orc. it is wounded and angry.",
+      "int_topk8_t0.8": "you strike a hulking orc. it limps but still fights.",
+      "int_greedy_tokens": 51
+    },
+    {
+      "ctx": [
+        "TASK:TREASURE",
+        "OBJ:STATUE",
+        "ITEM:DAGGER",
+        "OUT:FOUND"
+      ],
+      "prompt": null,
+      "data": "inside a headless statue you find a sharp dagger. it is light and quick.",
+      "int_greedy": "a sharp dagger lies hidden in a statue of a knight. it fits neatly in a boot.",
+      "float_greedy": "inside a statue of a knight you find a sharp dagger. it fits neatly in a boot.",
+      "int_topk8_t0.8": "inside a headless statue you find a sharp dagger. it fits neatly in a boot.",
+      "int_greedy_tokens": 78
+    },
+    {
+      "ctx": [
+        "TASK:TREASURE",
+        "OBJ:STATUE",
+        "ITEM:MACE",
+        "OUT:FOUND"
+      ],
+      "prompt": null,
+      "data": "a heavy mace lies hidden in a headless statue. it is solid and brutal.",
+      "int_greedy": "inside a statue of a knight you find a heavy mace. it hits hard.",
+      "float_greedy": "inside a statue of a knight you find a heavy mace. it hits hard.",
+      "int_topk8_t0.8": "inside a statue of a knight you find a spiked mace. it is solid and brutal.",
+      "int_greedy_tokens": 65
+    },
+    {
+      "ctx": [
+        "TASK:NPC",
+        "LOC:LABYRINTH",
+        "NPC:HERMIT",
+        "MOOD:AFRAID"
+      ],
+      "prompt": null,
+      "data": "a ragged hermit is here. \"is it gone? tell me it is gone!\"",
+      "int_greedy": "a ragged hermit is here. \"is it gone? tell me it is gone!\"",
+      "float_greedy": "a ragged hermit is here. \"is it gone? tell me it is gone!\"",
+      "int_topk8_t0.8": "a wild-eyed hermit is here. \"is it gone? tell me it is gone!\"",
+      "int_greedy_tokens": 59
+    },
+    {
+      "ctx": [
+        "TASK:TREASURE",
+        "OBJ:BONES",
+        "ITEM:SWORD",
+        "OUT:FOUND"
+      ],
+      "prompt": null,
+      "data": "inside a heap of bones you find a rusty sword. runes run down the blade.",
+      "int_greedy": "inside a heap of bones you find a rusty sword. it balances well in the hand.",
+      "float_greedy": "inside a heap of bones you find a rusty sword. it balances well in the hand.",
+      "int_topk8_t0.8": "you uncover a fine sword in a pile of old bones. the edge is still keen.",
+      "int_greedy_tokens": 77
+    },
+    {
+      "ctx": [
+        "TASK:ACTION",
+        "OBJ:BONES",
+        "ACT:PULL",
+        "OUT:TRAP"
+      ],
+      "prompt": null,
+      "data": "a pile of old bones clicks and spikes shoot from the wall!",
+      "int_greedy": "you pull a pile of old bones. the floor drops away beneath you!",
+      "float_greedy": "you pull a pile of old bones. the floor drops away beneath you!",
+      "int_topk8_t0.8": "a heap of bones clies and spikes shoot from the wall!",
+      "int_greedy_tokens": 64
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CRYPT",
+        "ROOM:BURIAL_CHAMBER",
+        "MON:GOBLIN",
+        "HP:HIGH"
+      ],
+      "prompt": null,
+      "data": "carved names of the dead cover every wall here. you are not alone. a scrawny goblin is here.",
+      "int_greedy": "a forgotten burial chamber, silent as the grave it is. a scrawny goblin stirs in the dark.",
+      "float_greedy": "you enter a burial chamber. dust lies thick on the dead. a scrawny goblin lurks here.",
+      "int_topk8_t0.8": "rows of stone coffins line this silent burial chamber. a sneering goblin lurks here.",
+      "int_greedy_tokens": 91
+    }
+  ]
+}

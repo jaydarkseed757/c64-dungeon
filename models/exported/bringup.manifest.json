@@ -1,0 +1,224 @@
+{
+  "file": "bringup.d64ai",
+  "bytes": 36096,
+  "sha256": "656ae5399c7fbeea0f2946cefd48f4f19a220cc1546f1a583fbea6925ed278d1",
+  "header": {
+    "magic": "443634414900",
+    "format_major": 1,
+    "format_minor": 1,
+    "header_size": 256,
+    "flags": 15,
+    "arch_id": 1,
+    "n_layers": 2,
+    "n_heads": 2,
+    "head_dim": 16,
+    "d_model": 32,
+    "d_ff": 64,
+    "vocab_size": 197,
+    "ctx_len": 128,
+    "weight_format": 1,
+    "activation_format": 1,
+    "norm_format": 1,
+    "activation_fn": 1,
+    "kv_format": 1,
+    "tile_rows": 64,
+    "tensor_count": 19,
+    "reserved0": 0,
+    "dir_offset": 256,
+    "tokenizer_offset": 33024,
+    "tokenizer_length": 2176,
+    "metadata_offset": 35328,
+    "metadata_length": 643,
+    "image_length": 36096,
+    "payload_crc32": 1003719975,
+    "rms_eps_q32": 42950,
+    "inv_sqrt_head_q24": 4194304,
+    "tok_pad": 0,
+    "tok_bos": 1,
+    "tok_eos": 2,
+    "tok_sep": 3,
+    "tok_unk": 4,
+    "first_control_id": 64,
+    "reserved1": 0,
+    "vocab_hash": 322492241,
+    "model_version": "646d36342d6272696e6775702d303100",
+    "model_name": "444d36342d4252494e4755502d30310000000000000000000000000000000000",
+    "source_sha256": "82cc76e4eee2c52890ee4e029a1b7bf3cd542b8477b3c4eb40f20db9a4ef04b9",
+    "header_crc32": 687858213
+  },
+  "tensors": [
+    {
+      "kind": "tok_emb",
+      "layer": 255,
+      "rows": 197,
+      "cols": 32,
+      "offset": 768,
+      "length": 6895
+    },
+    {
+      "kind": "pos_emb",
+      "layer": 255,
+      "rows": 128,
+      "cols": 32,
+      "offset": 7680,
+      "length": 4480
+    },
+    {
+      "kind": "attn_norm",
+      "layer": 0,
+      "rows": 32,
+      "cols": 1,
+      "offset": 12288,
+      "length": 64
+    },
+    {
+      "kind": "wq",
+      "layer": 0,
+      "rows": 32,
+      "cols": 32,
+      "offset": 12544,
+      "length": 1120
+    },
+    {
+      "kind": "wk",
+      "layer": 0,
+      "rows": 32,
+      "cols": 32,
+      "offset": 13824,
+      "length": 1120
+    },
+    {
+      "kind": "wv",
+      "layer": 0,
+      "rows": 32,
+      "cols": 32,
+      "offset": 15104,
+      "length": 1120
+    },
+    {
+      "kind": "wo",
+      "layer": 0,
+      "rows": 32,
+      "cols": 32,
+      "offset": 16384,
+      "length": 1120
+    },
+    {
+      "kind": "ffn_norm",
+      "layer": 0,
+      "rows": 32,
+      "cols": 1,
+      "offset": 17664,
+      "length": 64
+    },
+    {
+      "kind": "w1",
+      "layer": 0,
+      "rows": 64,
+      "cols": 32,
+      "offset": 17920,
+      "length": 2240
+    },
+    {
+      "kind": "w2",
+      "layer": 0,
+      "rows": 32,
+      "cols": 64,
+      "offset": 20224,
+      "length": 2144
+    },
+    {
+      "kind": "attn_norm",
+      "layer": 1,
+      "rows": 32,
+      "cols": 1,
+      "offset": 22528,
+      "length": 64
+    },
+    {
+      "kind": "wq",
+      "layer": 1,
+      "rows": 32,
+      "cols": 32,
+      "offset": 22784,
+      "length": 1120
+    },
+    {
+      "kind": "wk",
+      "layer": 1,
+      "rows": 32,
+      "cols": 32,
+      "offset": 24064,
+      "length": 1120
+    },
+    {
+      "kind": "wv",
+      "layer": 1,
+      "rows": 32,
+      "cols": 32,
+      "offset": 25344,
+      "length": 1120
+    },
+    {
+      "kind": "wo",
+      "layer": 1,
+      "rows": 32,
+      "cols": 32,
+      "offset": 26624,
+      "length": 1120
+    },
+    {
+      "kind": "ffn_norm",
+      "layer": 1,
+      "rows": 32,
+      "cols": 1,
+      "offset": 27904,
+      "length": 64
+    },
+    {
+      "kind": "w1",
+      "layer": 1,
+      "rows": 64,
+      "cols": 32,
+      "offset": 28160,
+      "length": 2240
+    },
+    {
+      "kind": "w2",
+      "layer": 1,
+      "rows": 32,
+      "cols": 64,
+      "offset": 30464,
+      "length": 2144
+    },
+    {
+      "kind": "final_norm",
+      "layer": 255,
+      "rows": 32,
+      "cols": 1,
+      "offset": 32768,
+      "length": 64
+    }
+  ],
+  "parameters": 26944,
+  "quantization_rel_rms_error_max": {
+    "tok_emb": 0.004120284323250686,
+    "pos_emb": 0.005508152588314868,
+    "wq": 0.005105577498741642,
+    "wk": 0.006273099638232122,
+    "wv": 0.005853176569010055,
+    "wo": 0.005613262136137852,
+    "w1": 0.005626195410730342,
+    "w2": 0.007556680733722501
+  },
+  "metadata": [
+    "created=2026-11-17T21:33:33+00:00",
+    "model_version=dm64-bringup-01",
+    "arch_id=1",
+    "tokenizer=char",
+    "train_config={\"data\": {\"train\": \"datasets/training/train.jsonl\", \"val\": \"datasets/validation/val.jsonl\"}, \"model\": {\"ctx_len\": 128, \"d_ff\": 64, \"d_model\": 32, \"n_heads\": 2, \"n_layers\": 2, \"rms_eps\": 1e-05, \"vocab_size\": 197}, \"name\": \"bringup\", \"train\": {\"batch\": 128, \"eval_every\": 1000, \"grad_clip\": 1.0, \"log_every\": 250, \"lr\": 0.003, \"min_lr\": 0.0003, \"seed\": 64, \"steps\": 3000, \"warmup\": 200, \"weight_decay\": 0.05}}",
+    "train_step=3000",
+    "val_loss_float=0.9721701086281761",
+    "checkpoint_sha256=82cc76e4eee2c52890ee4e029a1b7bf3cd542b8477b3c4eb40f20db9a4ef04b9"
+  ]
+}
