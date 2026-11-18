@@ -60,7 +60,7 @@ A one-sentence room description takes 10–30 seconds. In the game you can keep 
 
 ### Files
 
-Ready-built files are in the [`dist/`](dist) folder.
+Download them from the [latest release](https://github.com/jaydarkseed757/c64-dungeon/releases/latest), or take them from the [`dist/`](dist) folder.
 
 | File | Purpose |
 | --- | --- |
