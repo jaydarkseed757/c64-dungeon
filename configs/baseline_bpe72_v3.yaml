@@ -1,0 +1,9 @@
+# baseline_bpe72 geometry and letter groups, trained on the v3 dataset
+# (v2 + phrasebank_v3_additions.yaml, fact-filtered, game texts <= 44 tokens,
+# typos in typed prompts; make dataset-v3). Milestone 8.
+name: baseline_bpe72_v3
+tokenizer: bpe72
+model: {ctx_len: 128, d_model: 64, n_layers: 4, n_heads: 4, d_ff: 256, rms_eps: 1.0e-5}
+data: {train: datasets/training/train_v3.jsonl, val: datasets/validation/val_v3.jsonl}
+train: {seed: 64, steps: 16000, batch: 128, lr: 2.0e-3, min_lr: 1.0e-4, warmup: 400,
+        weight_decay: 0.05, grad_clip: 1.0, log_every: 500, eval_every: 2000}

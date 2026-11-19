@@ -1,0 +1,10 @@
+# Quantization-aware fine-tune of baseline_bpe72_v3: the forward pass rounds
+# weights and attention keys/values like the C64 engine (python/model.py, qat).
+# Same shape and tokens, so the package is a drop-in replacement. Milestone 8.
+name: baseline_bpe72_v3q
+tokenizer: bpe72
+init_from: models/checkpoints/baseline_bpe72_v3/best.pt
+model: {ctx_len: 128, d_model: 64, n_layers: 4, n_heads: 4, d_ff: 256, rms_eps: 1.0e-5, qat: true}
+data: {train: datasets/training/train_v3.jsonl, val: datasets/validation/val_v3.jsonl}
+train: {seed: 65, steps: 4000, batch: 128, lr: 3.0e-4, min_lr: 2.0e-5, warmup: 100,
+        weight_decay: 0.05, grad_clip: 1.0, log_every: 500, eval_every: 1000}

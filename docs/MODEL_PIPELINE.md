@@ -202,3 +202,82 @@ MPS training is not bit-reproducible. Dataset generation, conversion and integer
 | Greedy characters per token | 1.66 | 1.68 |
 
 The higher loss is expected: v2 offers more valid phrasings per situation, so each next token is less certain. The v2 model knows both phrase sets (v1 loss 0.159), varies its answers more, writes more new combinations, and makes fewer non-words. Integer/float greedy agreement is lower because near-ties between phrasings are more common; the engine still matches `reference_int.py` bit for bit in VICE (`tests/test_engine_model.py`, slow set). Adopted as the shipped model on 2026-11-17. Not yet run on hardware.
+
+## 11. Better text: v3 data, fact checks and C64-aware training (Milestone 8, 2026-11-18)
+
+### Measuring: `tools/fact_check.py` (`make fact-check`)
+
+It builds the context records the game sends: rooms (half with a monster), monster sightings, kills, treasure, locked doors, unlocked doors and traps. It then generates with the game's settings (temperature 0.8, top-8, at most 48 tokens), by default on the bit-exact integer reference, so the text is what the C64 computes. For each answer it counts:
+
+- **fact_ok:** no rule in `python/facts.py` is broken.
+  - wrong_monster: names a monster that isn't in the record.
+  - missing_monster: a sighting that doesn't name its monster.
+  - missing_item, wrong_item: treasure that doesn't name its item, or names another one.
+  - missing_lock: a locked door that doesn't say "lock".
+- **cut:** stopped by the 48-token limit instead of ending.
+- **distinct:** different answers.
+- **new:** answers not found word for word in the training text.
+- **nonword:** answers containing a word the training text never uses.
+
+### What was wrong with v2
+
+- **Cut-off text:** 65% of v2 room texts and 47% of monster texts were longer than 48 tokens. On the C64 about a third of room and monster narrations stopped mid-word ("it looks strong and ready to f"). For a room with a monster, the monster sentence was usually the part cut off.
+- **Facts in the data:** 1.4% of the v2 training examples broke a rule themselves. For example, "a shambling corpse" never says zombie, and "rats scratch behind the walls" turns up with no rat.
+- **Locked doors:** they were rare in the data and sometimes came out garbled.
+
+### v3 data (`make dataset-v3`)
+
+`datasets/raw/phrasebank_v3_additions.yaml` holds new original phrases written by Claude, like v1 and v2:
+
+- short room openings (`roomshort_*`, 8 per room type), used for 80% of rooms that have a second sentence;
+- more rooms, monsters and treasure lines;
+- more locked-door, key and trap lines;
+- 25 more typed-question phrasings.
+
+New generator options, all off by default, so v1 and v2 rebuild byte for byte:
+
+- `--fact-filter` drops examples that break a fact rule.
+- `--max-game-tokens 44` drops game-event texts longer than 44 tokens.
+- `--typos 0.3` gives 30% of typed questions one keyboard slip, such as "waht is coming".
+- The bank setting `game_boost: 0.3` draws 30% of action examples from the game's own door and trap records.
+
+The v3 dataset has 300,000 examples (151,257 unique). The filters dropped 47,593 over-long game texts and 5,200 fact breaks; none are left.
+
+### C64-aware training (`model.qat`)
+
+With `qat: true` the PyTorch forward pass rounds the way the engine does: every weight matrix to int8 per row, and attention keys and values to 7-bit magnitudes with one power-of-two step per head and position. Gradients pass straight through the rounding. On v2 weights this simulation brings logits 4× closer to the integer engine (mean absolute difference 0.022 against 0.091).
+
+- `baseline_bpe72_v3`: v3 data, 16,000 steps from scratch, 37 minutes on the Mac GPU.
+- `baseline_bpe72_v3q`: `baseline_bpe72_v3` fine-tuned with `qat` for 4,000 steps (`init_from`, learning rate 3e-4), 10 minutes.
+
+Both keep the shape and letter groups of v2 (vocabulary hash `$11B711A3`), so the engine, terminal and game need no changes.
+
+### Results
+
+Integer reference, the game's settings, 3 seeds × 420 game records (60 per kind) = 1,260 answers per model. Measured on the Mac.
+
+| | v2 | v3 | v3q |
+|---|---:|---:|---:|
+| Fact rules kept | 1,237 (98.2%) | 1,251 (99.3%) | 1,254 (99.5%) |
+| Cut off by the 48-token limit | 136 (10.8%) | 4 | 1 |
+| Answers with a non-word | 24 | 19 | 14 |
+| Distinct answers | 712 | 751 | 768 |
+| Not word for word in the training text | 217 | 133 | 111 |
+| Integer vs float greedy exact match (`make evaluate`, 30) | 21/30 | 26/30 | 29/30 |
+| Teacher-forced top-1 agreement, integer vs float | — | 99.54% | 99.95% |
+| Integer-model loss, `make evaluate` sample of v3 val (nats/token) | — | 0.1951 | 0.1897 |
+
+- For v3q, "float" in `make evaluate` is the C64-aware forward pass, which is what v3q was trained to match.
+- v3 and v3q copy more whole training sentences than v2: shorter texts leave fewer ways to combine phrases. They still give more distinct answers.
+- Misspelled typed questions (30 prompts, temperature 0.8): 1 answer with a non-word for v2 and 1 for v3q. There is no measurable gain on this small test.
+
+`baseline_bpe72_v3q` was adopted as the shipped model on 2026-11-18. It hasn't run on hardware yet.
+
+### The game's own check
+
+`game/source/narrator.asm` now prints narration one whole word at a time and checks each word against `game/source/generated/fact_words.asm`. That list is generated from `python/facts.py`, 427 bytes.
+
+- **Wrong monster:** a word naming a monster that isn't in the record is never shown. The sentence ends with "..." and the game prints its built-in line.
+- **Missing name:** if a monster sighting never names its monster, treasure never names its item, or a locked door never says "lock", the game adds its built-in line after the text.
+
+See `docs/GAME_DESIGN.md` section 10 and `tests/test_facts.py`.

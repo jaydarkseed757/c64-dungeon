@@ -1,0 +1,288 @@
+# DM64 phrase bank v3 additions (Milestone 8, 2026-11-18)
+#
+# Provenance: original text written for this project by Claude (an AI model),
+# like phrasebank.yaml and phrasebank_v2_additions.yaml. No text is copied from
+# games, books or other datasets.
+#
+# Merged onto phrasebank.yaml + phrasebank_v2_additions.yaml by
+# tools/dataset_generator.py --extra (make dataset-v3). Aims:
+#   - game texts that fit the game's 48-token limit: roomshort_* are short room
+#     openings, used when a second sentence (object, monster, event) follows
+#   - more locked-door, key and trap lines (the game's door and trap events)
+#   - more ways to type a question (typos are added by the generator)
+#   - more variety for rooms, monsters and treasure
+
+task_weights: {ROOM: 0.22, MONSTER: 0.12, TREASURE: 0.12, NPC: 0.05, QUEST: 0.03, EVENT: 0.05,
+               COMBAT: 0.13, ACTION: 0.16, FREE: 0.12}
+# share of ACTION examples drawn from the game's own door and trap records
+game_boost: 0.3
+# share of room examples with a second sentence that use a roomshort_* opening
+roomshort_share: 0.8
+
+# ---------------------------------------------------------------- short room openings
+roomshort_corridor:
+  - "a {LOC} corridor runs ahead."
+  - "you walk a narrow passage."
+  - "a {dark} hallway bends away."
+  - "the corridor narrows here."
+  - "a low tunnel leads on."
+  - "you follow a {cold} passage."
+  - "the passage turns sharply."
+  - "a long hall of {old} stone."
+roomshort_burial_chamber:
+  - "a {LOC} burial chamber."
+  - "coffins line the walls here."
+  - "you enter a tomb of the dead."
+  - "bones fill the wall niches."
+  - "a {quiet} burial vault."
+  - "stone coffins crowd the floor."
+  - "this is a resting place of the dead."
+  - "dust lies thick on old coffins."
+roomshort_treasure_room:
+  - "a {LOC} vault, once rich."
+  - "coins glint in the dust."
+  - "an old treasure room."
+  - "broken chests lie open here."
+  - "a looted vault."
+  - "you find a strongroom."
+  - "gold dust sparkles on the floor."
+  - "a {dark} treasure chamber."
+roomshort_lair:
+  - "a lair stinks of beast."
+  - "bones litter this den."
+  - "you step into a {dark} lair."
+  - "filth covers the floor."
+  - "a beast makes its home here."
+  - "claw marks score the stone."
+  - "this {LOC} den reeks."
+  - "a nest of rags and bones."
+roomshort_library:
+  - "a {LOC} library."
+  - "shelves of old books rise here."
+  - "you enter a reading room."
+  - "scrolls lie heaped about."
+  - "rotting books fill the shelves."
+  - "a {quiet} library of dust."
+  - "pages litter the floor."
+  - "tall bookcases lean together."
+roomshort_armory:
+  - "an old armory."
+  - "rusted blades hang on racks."
+  - "you enter a {LOC} armory."
+  - "broken shields lie stacked."
+  - "weapon racks line the walls."
+  - "a guardroom full of rust."
+  - "this armory smells of iron."
+  - "dented helms litter the floor."
+roomshort_secret_chamber:
+  - "a hidden room."
+  - "a secret chamber opens up."
+  - "you find a forgotten room."
+  - "no one has been here in years."
+  - "a concealed {dark} chamber."
+  - "a room behind the wall."
+  - "a hidden vault, long sealed."
+  - "dust lies undisturbed here."
+roomshort_trap_room:
+  - "this room feels wrong."
+  - "pressure plates cover the floor."
+  - "holes pock the walls here."
+  - "a {dark} room of hidden traps."
+  - "old blood stains the tiles."
+  - "the floor is scored with blades."
+  - "a room built to kill."
+  - "something here is not safe."
+roomshort_boss_room:
+  - "a vast {dark} chamber."
+  - "a great hall of dread."
+  - "the air here is heavy."
+  - "a huge room with a high roof."
+  - "you enter a hall of bones."
+  - "a grand and terrible chamber."
+  - "this {LOC} hall is enormous."
+  - "pillars rise into the dark."
+roomshort_magic_chamber:
+  - "a chamber hums with power."
+  - "runes glow on the floor."
+  - "the air crackles here."
+  - "a {LOC} room of strange magic."
+  - "sigils cover the walls."
+  - "a circle is carved in the floor."
+  - "blue light flickers here."
+  - "this room smells of ozone."
+roomshort_shrine:
+  - "a small shrine."
+  - "a {LOC} shrine, long cold."
+  - "candles stand unlit here."
+  - "a holy place, now defiled."
+  - "prayer marks cover the stone."
+  - "an old shrine to a lost god."
+  - "you enter a {quiet} shrine."
+  - "a cracked idol stands here."
+roomshort_prison:
+  - "a row of cells."
+  - "rusted chains hang here."
+  - "you enter an old prison."
+  - "iron bars line the room."
+  - "a {dark} cell block."
+  - "shackles dangle from the wall."
+  - "this {LOC} jail stinks."
+  - "empty cells line the walls."
+roomshort_stairs:
+  - "stairs lead down."
+  - "a stairway sinks into the dark."
+  - "worn steps descend here."
+  - "you find a {old} stair."
+  - "a spiral stair winds down."
+  - "steps vanish into shadow."
+  - "a stair to the depths."
+  - "the steps here are slick."
+roomshort_hall:
+  - "a great hall."
+  - "a wide {LOC} hall."
+  - "pillars hold up the roof."
+  - "you enter a long hall."
+  - "an old feasting hall."
+  - "a {dark} hall of columns."
+  - "broken tables fill the hall."
+  - "the hall echoes your steps."
+
+# ---------------------------------------------------------------- more full rooms
+room_corridor:
+  - "the {LOC} corridor is choked with fallen stone."
+  - "water runs down the walls of this passage."
+room_burial_chamber:
+  - "the lids of the coffins here have all been pushed aside."
+  - "a single coffin rests on a raised slab."
+room_treasure_room:
+  - "empty chests stand open in this {LOC} vault."
+  - "a few coins still gleam among the dust."
+room_lair:
+  - "a heap of stolen things fills this lair."
+  - "the walls of this den are slick with grime."
+room_library:
+  - "a reading desk still holds an open book."
+  - "the shelves here have collapsed into heaps."
+room_armory:
+  - "a forge stands cold in the corner of this armory."
+  - "empty racks line this {LOC} armory."
+room_secret_chamber:
+  - "cobwebs hang thick in this hidden room."
+  - "a narrow gap in the wall opens on a secret room."
+room_trap_room:
+  - "the floor of this room is full of small holes."
+  - "a dead hand still reaches for the far door."
+room_boss_room:
+  - "a great throne stands at the end of this {dark} hall."
+  - "the roof of this chamber is lost in the dark."
+room_magic_chamber:
+  - "a ring of stones hums softly in this chamber."
+  - "strange symbols glow faintly on every wall."
+room_shrine:
+  - "an altar stands in this {LOC} shrine, its offerings rotted."
+  - "a statue watches over this small shrine."
+room_prison:
+  - "the cells here are empty, their doors hanging open."
+  - "scratched tally marks cover the walls of this prison."
+room_stairs:
+  - "a broken stair leads down into the deep."
+  - "the steps here are worn smooth by many feet."
+room_hall:
+  - "banners rot on the walls of this great hall."
+  - "a cold hearth fills one wall of this hall."
+
+see_mon:
+  - "{MON} is here."
+  - "{MON} waits."
+  - "{MON} guards this place."
+  - "you see {MON}."
+  - "{MON} lurks nearby."
+  - "{MON} watches you."
+see_obj:
+  - "{you_see} {OBJ}."
+  - "{OBJ} stands here."
+  - "there is {OBJ}."
+
+# ---------------------------------------------------------------- monsters
+mondesc_skeleton:
+  - "{MON} rises, bones clacking."
+  - "{MON} lifts a rusted blade."
+mondesc_goblin:
+  - "{MON} grins and draws a knife."
+  - "{MON} hisses at you."
+mondesc_orc:
+  - "{MON} roars and charges."
+  - "{MON} swings a heavy club."
+mondesc_spider:
+  - "{MON} scuttles toward you."
+  - "{MON} drops from its web."
+mondesc_zombie:
+  - "{MON} shuffles closer."
+  - "{MON} reaches for you, moaning."
+mondesc_troll:
+  - "{MON} blocks the way, grunting."
+  - "{MON} beats its chest."
+mondesc_dark_mage:
+  - "{MON} raises a glowing hand."
+  - "{MON} mutters a dark spell."
+mondesc_dragon:
+  - "{MON} uncoils, smoke rising."
+  - "{MON} opens its burning eyes."
+mondesc_rat:
+  - "{MON} bares its yellow teeth."
+  - "{MON} squeals and darts closer."
+mondesc_bat:
+  - "{MON} swoops down at you."
+  - "{MON} flutters overhead."
+mst_healthy:
+  - "it looks strong."
+  - "it is unhurt."
+  - "it is ready to fight."
+
+# ---------------------------------------------------------------- treasure
+treasure_found_noobj:
+  - "you grab {ITEM}. {ITEMFLAIR}"
+  - "you pick up {ITEM}. {ITEMFLAIR}"
+  - "here lies {ITEM}. {ITEMFLAIR}"
+  - "{ITEM} glints at your feet. {ITEMFLAIR}"
+  - "you spot {ITEM}. {ITEMFLAIR}"
+  - "you uncover {ITEM}. {ITEMFLAIR}"
+
+# ---------------------------------------------------------------- doors and traps
+act_open:
+  - locked: ["{OBJ} is locked.", "{OBJ} will not open. it is locked.", "the lock on {OBJ} holds fast.", "{OBJ} is locked. you need a key.", "you push, but {OBJ} is locked.", "a rusty lock bars {OBJ}.", "{OBJ} is shut and locked.", "{OBJ} does not move. it is locked tight."]
+act_use:
+  - success: ["{ITEM} turns in the lock. {OBJ} opens.", "you unlock {OBJ} with {ITEM}.", "with a click, {ITEM} opens {OBJ}.", "{ITEM} fits. {OBJ} swings open.", "you turn {ITEM} and {OBJ} creaks open."]
+act_search:
+  - trap: ["a trap! a blade springs from the wall.", "click. a dart flies at you!", "a hidden spike jabs your foot!", "you set off a trap. needles strike you!", "the floor gives way. stakes cut your legs!", "a trap snaps shut on your hand."]
+
+# ---------------------------------------------------------------- typed questions
+free_room_prompt:
+  - "describe this place"
+  - "what is in this room"
+  - "where are we"
+  - "what does the room look like"
+  - "tell me about this room"
+  - "describe the dungeon"
+  - "look around"
+  - "what is here"
+  - "look"
+  - "describe the area"
+free_monster_prompt:
+  - "who is there"
+  - "what creature is this"
+  - "describe the beast"
+  - "what is coming"
+  - "look at the {MONSHORT}"
+  - "what attacks me"
+free_treasure_prompt:
+  - "what is this"
+  - "describe the item"
+  - "what did i pick up"
+  - "look at the treasure"
+  - "is there loot here"
+free_event_prompt:
+  - "what is that noise"
+  - "what happens"
+  - "listen"
+  - "what do i feel"

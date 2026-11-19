@@ -4,7 +4,7 @@
 
 A small transformer language model, trained for this game, lives in the C64's REU. A native 6502 inference engine, written in ACME assembly, computes every character on the C64 itself. No network, no PC, no cloud: just the C64 Ultimate.
 
-The model is the narrator, not the game. The assembly game engine owns every rule, every die roll and every number. The model only describes what the game has already decided. If the model is missing, the game still plays with built-in text.
+The model is the narrator, not the game. The assembly game engine owns every rule, every die roll and every number. The model only describes what the game has already decided. If the model is missing, the game still plays with built-in text. The game also checks each word before showing it: a monster that isn't there never appears in the text.
 
 ![The AI terminal on a C64 Ultimate](docs/screenshots/terminal_hw_session.png)
 
@@ -31,7 +31,8 @@ The model is the narrator, not the game. The assembly game engine owns every rul
 | Parameters | 221,760, stored as int8 with per-row scales |
 | Vocabulary | 256 tokens: 46 characters, 72 common letter groups (like `the`), control tokens for scenes |
 | Package | `DM64AI.REU`, 237 KB, `.d64ai` format 1.1 ([docs/MODEL_FORMAT.md](docs/MODEL_FORMAT.md)) |
-| Training data | About 159,000 short fantasy texts generated from an original phrase bank ([docs/MODEL_PIPELINE.md](docs/MODEL_PIPELINE.md)) |
+| Training data | About 151,000 short fantasy texts generated from an original phrase bank, checked against the game's facts ([docs/MODEL_PIPELINE.md](docs/MODEL_PIPELINE.md)) |
+| Training | Trained on a Mac, then fine-tuned with the C64's integer rounding simulated, so the C64's answers match the model's |
 
 The engine uses no floating point. It works in fixed-point integers, using:
 
@@ -139,15 +140,19 @@ make test
 Retraining the model from scratch:
 
 ```bash
-make dataset-v2
+make dataset-v3
 ```
 
 ```bash
-make train MODEL=baseline_bpe72_v2
+make train MODEL=baseline_bpe72_v3
 ```
 
 ```bash
-make convert MODEL=baseline_bpe72_v2
+make train MODEL=baseline_bpe72_v3q
+```
+
+```bash
+make convert MODEL=baseline_bpe72_v3q VERSION=dm64-bpe72-v3q
 ```
 
 `make help` lists every target. [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) covers the workflow, VICE automation and copying files to an Ultimate over the network.
@@ -179,7 +184,8 @@ make convert MODEL=baseline_bpe72_v2
 | 4 AI terminal | Done, runs on the C64 Ultimate ([docs/TERMINAL.md](docs/TERMINAL.md)) |
 | 5 Dungeon game | Done, runs on the C64 Ultimate ([docs/GAME_DESIGN.md](docs/GAME_DESIGN.md)) |
 | 6 AI narration in the game | Done, runs on the C64 Ultimate ([docs/GAME_DESIGN.md](docs/GAME_DESIGN.md) section 10) |
-| 7 Optimization and release | Engine 1.76× faster per token in VICE and about 1.4× on hardware; release packaging in progress |
+| 7 Optimization and release | Engine 1.76× faster per token in VICE and about 1.4× on hardware; first release 0.90 |
+| 8 Better text | New data, fact checks on the Mac and in the game, C64-aware training (`baseline_bpe72_v3q`); tested on the Mac and in VICE, not yet on hardware ([docs/MODEL_PIPELINE.md](docs/MODEL_PIPELINE.md) section 11) |
 
 **Known limits:**
 

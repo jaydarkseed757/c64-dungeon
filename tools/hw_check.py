@@ -89,7 +89,7 @@ def run_vice(prg):
         parts = line.split()
         if len(parts) >= 3 and parts[1] == "=":
             labels[parts[0]] = int(parts[2].lstrip("$"), 16)
-    with Vice(reu_image=ROOT / "models/exported/baseline_bpe72_v2.d64ai") as vm:
+    with Vice(reu_image=ROOT / "models/exported/baseline_bpe72_v3q.d64ai") as vm:
         vm.load_prg(prg)
         vm.run_until(labels["show"], timeout=600)
         return vm.read(RES, RES + 159)

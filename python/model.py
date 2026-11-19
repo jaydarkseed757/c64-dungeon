@@ -5,6 +5,15 @@ Matches docs/ARCHITECTURE.md and docs/MODEL_FORMAT.md:
   - pre-RMSNorm blocks: multi-head causal attention, ReLU feed-forward
   - no biases anywhere
   - final RMSNorm; output head tied to the token embedding
+
+With qat=True (Milestone 8) the forward pass rounds like the C64 engine, so
+training learns weights that survive the conversion (quantization-aware
+training, straight-through gradients):
+  - every weight matrix and embedding to int8 per row (python/quantize.py)
+  - attention keys and values to 7-bit magnitudes with one power-of-two step
+    per head and position (fixedpoint.pack(x, 7) in reference_int.kv_entry)
+The other integer steps (15-bit packing, Q16.16 outputs, the exp table) are
+far finer and are not modelled.
 """
 from dataclasses import dataclass, asdict
 
@@ -25,6 +34,7 @@ class ModelConfig:
     d_ff: int = 256
     rms_eps: float = 1e-5
     dropout: float = 0.0
+    qat: bool = False
 
     @property
     def head_dim(self):
@@ -55,6 +65,27 @@ class ModelConfig:
         return asdict(self)
 
 
+def fake_quant_rows(w):
+    """int8 per row, symmetric (scale max|w| / 127); straight-through gradient."""
+    scale = w.detach().abs().amax(dim=1, keepdim=True).clamp_min(1e-12) / 127
+    q = torch.round(w / scale).clamp(-127, 127) * scale
+    return w + (q - w).detach()
+
+
+def fake_quant_kv(x):
+    """Like pack(v, 7) on Q16.16 values, per (batch, head, position) over head_dim:
+    step 2^(floor(log2(peak)) - 6) in Q16.16 units, at least 1 unit."""
+    peak = x.detach().abs().amax(dim=-1, keepdim=True) * 65536
+    exp = torch.floor(torch.log2(peak.clamp_min(1.0))) - 6
+    step = torch.pow(2.0, exp.clamp_min(0)) / 65536
+    q = torch.round(x / step).clamp(-127, 127) * step
+    return x + (q - x).detach()
+
+
+def qweight(layer, qat):
+    return fake_quant_rows(layer.weight) if qat else layer.weight
+
+
 class RMSNorm(nn.Module):
     def __init__(self, d, eps):
         super().__init__()
@@ -83,14 +114,18 @@ class Block(nn.Module):
     def forward(self, x):
         b, t, d = x.shape
         h, hd = self.cfg.n_heads, self.cfg.head_dim
+        qat = self.cfg.qat
+        lin = lambda layer, inp: F.linear(inp, qweight(layer, qat))  # noqa: E731
         n = self.attn_norm(x)
-        q = self.wq(n).view(b, t, h, hd).transpose(1, 2)
-        k = self.wk(n).view(b, t, h, hd).transpose(1, 2)
-        v = self.wv(n).view(b, t, h, hd).transpose(1, 2)
+        q = lin(self.wq, n).view(b, t, h, hd).transpose(1, 2)
+        k = lin(self.wk, n).view(b, t, h, hd).transpose(1, 2)
+        v = lin(self.wv, n).view(b, t, h, hd).transpose(1, 2)
+        if qat:
+            k, v = fake_quant_kv(k), fake_quant_kv(v)
         a = F.scaled_dot_product_attention(q, k, v, is_causal=True,
                                            dropout_p=self.cfg.dropout if self.training else 0.0)
-        x = x + self.drop(self.wo(a.transpose(1, 2).reshape(b, t, d)))
-        x = x + self.drop(self.w2(F.relu(self.w1(self.ffn_norm(x)))))
+        x = x + self.drop(lin(self.wo, a.transpose(1, 2).reshape(b, t, d)))
+        x = x + self.drop(lin(self.w2, F.relu(lin(self.w1, self.ffn_norm(x)))))
         return x
 
 
@@ -113,10 +148,14 @@ class DM64Model(nn.Module):
         t = ids.shape[1]
         if t > self.cfg.ctx_len:
             raise ValueError(f"sequence length {t} exceeds ctx_len {self.cfg.ctx_len}")
-        x = self.tok_emb(ids) + self.pos_emb(torch.arange(t, device=ids.device))
+        if self.cfg.qat:
+            tok, pos = fake_quant_rows(self.tok_emb.weight), fake_quant_rows(self.pos_emb.weight)
+        else:
+            tok, pos = self.tok_emb.weight, self.pos_emb.weight
+        x = F.embedding(ids, tok) + pos[:t]
         for block in self.blocks:
             x = block(x)
-        return self.final_norm(x) @ self.tok_emb.weight.T
+        return self.final_norm(x) @ tok.T
 
     def param_count(self):
         return sum(p.numel() for p in self.parameters())

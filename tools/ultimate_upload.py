@@ -28,8 +28,8 @@ REMOTE_NAME = "dungeon-master"
 MANIFEST = [
     ("terminal/build/dm64.prg", "DM64.PRG"),                  # the AI terminal
     ("game/build/dm64game.prg", "DM64GAME.PRG"),              # the dungeon game (Milestone 5, no AI yet)
-    ("models/exported/baseline_bpe72_v2.d64ai", "DM64AI.REU"),       # .REU: the menu offers "Load into REU"
-    ("models/exported/baseline_bpe72_v2.manifest.json", "MANIFEST.JSON"),
+    ("models/exported/baseline_bpe72_v3q.d64ai", "DM64AI.REU"),       # .REU: the menu offers "Load into REU"
+    ("models/exported/baseline_bpe72_v3q.manifest.json", "MANIFEST.JSON"),
     ("release/README.txt", "README.TXT"),
 ]
 

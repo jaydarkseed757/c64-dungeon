@@ -55,7 +55,7 @@ class EngineRun:
 
 
 @pytest.mark.parametrize("name", ["bringup", "bringup_bpe72", pytest.param("baseline", marks=pytest.mark.slow),
-                                  pytest.param("baseline_bpe72_v2", marks=pytest.mark.slow)])
+                                  pytest.param("baseline_bpe72_v3q", marks=pytest.mark.slow)])
 def test_forward_pass_matches_reference(name, tmp_path):
     path = ROOT / f"models/exported/{name}.d64ai"
     if not path.exists():

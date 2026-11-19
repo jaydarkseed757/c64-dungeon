@@ -2,7 +2,7 @@
 # Engine targets assemble the ACME test programs (Milestone 3). Game targets come with Milestone 5.
 
 PY      := .venv/bin/python
-MODEL   ?= baseline_bpe72_v2
+MODEL   ?= baseline_bpe72_v3q
 VERSION ?= dm64-$(MODEL)-01
 CKPT    := models/checkpoints/$(MODEL)/best.pt
 PKG     := models/exported/$(MODEL).d64ai
@@ -11,21 +11,23 @@ ACME    := acme -f cbm
 TABLES  := engine/source/generated/exp_table.asm
 ENGINE_SRC := $(wildcard engine/source/*.asm engine/include/*.inc) $(TABLES)
 
-.PHONY: help venv dataset dataset-v2 test test-slow train train-bringup convert evaluate validate inspect sizing \
+.PHONY: help venv dataset dataset-v2 dataset-v3 fact-check test test-slow train train-bringup convert evaluate validate inspect sizing \
         engine profile ultimate ultimate-dry terminal hw-check hw-terminal game
 
 help:
 	@echo "make venv            create .venv (uv, Python 3.12) and install requirements.txt"
 	@echo "make dataset         regenerate datasets/ from datasets/raw/phrasebank.yaml"
 	@echo "make dataset-v2      v2 dataset: phrasebank.yaml + phrasebank_v2_additions.yaml (*_v2.jsonl)"
+	@echo "make dataset-v3      v3 dataset: v2 + v3 phrases, fact-filtered, short game texts, typos"
 	@echo "make test            run the test suite (Python + VICE engine tests, fast set)"
 	@echo "make test-slow       also run the long VICE runs on the baseline model"
 	@echo "make engine          assemble the engine test programs (ACME)"
 	@echo "make profile         VICE cycle profile of the engine on \$$MODEL"
-	@echo "make train           train MODEL (default baseline_bpe72_v2; configs/\$$MODEL.yaml)"
+	@echo "make train           train MODEL (default baseline_bpe72_v3q; configs/\$$MODEL.yaml)"
 	@echo "make train-bringup   train the tiny bring-up model"
 	@echo "make convert         checkpoint -> models/exported/\$$MODEL.d64ai (+ manifest, tokens.inc)"
 	@echo "make evaluate        float vs integer agreement report for \$$MODEL"
+	@echo "make fact-check      game-style narration on the integer model: facts, variety, cut-offs"
 	@echo "make validate        independent format check of \$$MODEL.d64ai"
 	@echo "make inspect         print the package summary"
 	@echo "make sizing          architecture size table (docs/ARCHITECTURE.md)"
@@ -45,6 +47,11 @@ dataset:
 
 dataset-v2:
 	$(PY) tools/dataset_generator.py --extra datasets/raw/phrasebank_v2_additions.yaml --tag v2 --count 300000
+
+dataset-v3:
+	$(PY) tools/dataset_generator.py --extra datasets/raw/phrasebank_v2_additions.yaml \
+		--extra datasets/raw/phrasebank_v3_additions.yaml --tag v3 --count 300000 \
+		--fact-filter --max-game-tokens 44 --typos 0.3
 
 test: engine terminal game
 	$(PY) -m pytest -q
@@ -76,7 +83,7 @@ terminal/build/dm64.prg: terminal/source/terminal.asm $(TERM_TABLES) $(ENGINE_SR
 terminal: terminal/build/dm64.prg
 
 GAME_TABLES := game/source/generated/game_tables.asm
-$(GAME_TABLES): tools/gen_game_tables.py python/vocab.py
+$(GAME_TABLES): tools/gen_game_tables.py python/vocab.py python/facts.py
 	$(PY) tools/gen_game_tables.py
 
 game/build/dm64game.prg: $(wildcard game/source/*.asm) $(GAME_TABLES)
@@ -110,6 +117,9 @@ convert: $(PKG)
 evaluate: $(PKG)
 	$(PY) python/evaluate.py $(CKPT) $(PKG)
 
+fact-check: $(PKG)
+	$(PY) tools/fact_check.py $(PKG) --int -n 60 --train datasets/training/train_v3.jsonl
+
 validate:
 	python3 tools/format_validator.py $(PKG)
 
@@ -120,7 +130,7 @@ sizing:
 	python3 tools/arch_sizing.py
 
 # Release files to the C64 Ultimate over FTP (host: ULT_HOST, default 192.168.10.148).
-SHIP_MODEL := models/exported/baseline_bpe72_v2.d64ai
+SHIP_MODEL := models/exported/baseline_bpe72_v3q.d64ai
 
 ultimate: $(SHIP_MODEL) terminal game
 	python3 tools/ultimate_upload.py

@@ -53,3 +53,6 @@ THE DUNGEON GAME (DM64GAME.PRG)
   Locked doors (%) open when you walk into them carrying a key.
   N switches the AI narrator on/off; RUN/STOP skips the current narration.
   Narrated text is light blue; the game adds the numbers (XP, damage, gold).
+  The narrator writes word by word and is checked by the game: if it starts
+  to name a monster that is not there, it stops with "..." and the game's own
+  line follows.

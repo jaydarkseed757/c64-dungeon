@@ -117,7 +117,7 @@ def main():
         import d64ai
         import lexicon
         from reference_int import IntEngine
-        ref = IntEngine(d64ai.read((ROOT / "models/exported/baseline_bpe72_v2.d64ai").read_bytes()))
+        ref = IntEngine(d64ai.read((ROOT / "models/exported/baseline_bpe72_v3q.d64ai").read_bytes()))
         ids = ref.encode_prompt(["TASK:FREE"], args.prompt)
         want = lexicon.display(ref.decode(ref.generate(ids, max_chars=120)))
         print(f"reference: {want!r}\nmatch: {text == want}")

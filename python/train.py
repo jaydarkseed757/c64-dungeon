@@ -3,6 +3,10 @@
 
     python python/train.py --config configs/baseline.yaml [--resume] [--steps N]
 
+Config keys beyond model/data/train: tokenizer, device, init_from (start from
+another checkpoint's weights, e.g. for quantization-aware fine-tuning with
+model.qat: true).
+
 Writes models/checkpoints/<name>/{latest.pt,best.pt,log.jsonl,samples.txt}.
 Seeds Python, NumPy and torch. Bit-exact repeatability is only expected on CPU;
 MPS kernels are not guaranteed deterministic.
@@ -142,6 +146,11 @@ def main():
 
     step, best = 0, float("inf")
     data_rng = np.random.default_rng(seed)
+    if cfg.get("init_from") and not (args.resume and (out_dir / "latest.pt").exists()):
+        # fine-tune (e.g. quantization-aware) from another checkpoint's weights
+        init = torch.load(ROOT / cfg["init_from"], map_location=device, weights_only=False)
+        model.load_state_dict(init["model"])
+        print(f"initialized from {cfg['init_from']} (its val {init.get('val_loss', float('nan')):.4f})")
     if args.resume and (out_dir / "latest.pt").exists():
         ck = torch.load(out_dir / "latest.pt", map_location=device, weights_only=False)
         model.load_state_dict(ck["model"])

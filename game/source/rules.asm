@@ -793,7 +793,7 @@ inventory:
         jsr row_ptr
         ldy #2
         jsr say_at
-        !scr "Your pack (1-8 use, any other key closes)", 0
+        !scr "Your pack (1-8 use, other keys close)", 0
         lda #0
         sta t3
 .l:     lda t3
@@ -993,8 +993,8 @@ clear_view:
         ldx #VIEW_TOP
 -       jsr row_ptr
         ldy #39
-        lda #$20
---      sta (scr),y
+--      lda #$20                ; (reload: A holds the colour after the first cell)
+        sta (scr),y
         lda #C_TEXT
         sta (colp),y
         dey

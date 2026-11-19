@@ -10,7 +10,14 @@ narration consistent with that context. Output (JSON lines):
     datasets/processed/dm64_v1_stats.json    counts, lengths, coverage, hashes
 
 --extra FILE merges more phrases onto the bank (lists are appended, act_* outcomes
-extended, task_weights replaces the task mix). --tag v2 writes dm64_v2_*.jsonl,
+extended, task_weights and scalar settings replace).
+
+v3 options (all off by default, so v1 and v2 rebuild unchanged):
+  --fact-filter          drop examples that break a python/facts.py rule
+  --max-game-tokens N    drop game-event texts longer than N tokens
+  --typos P              give a share P of typed prompts one keyboard slip
+  bank settings          game_boost (share of the game's door/trap records among
+                         ACTION examples), roomshort_share (short room openings) --tag v2 writes dm64_v2_*.jsonl,
 train_v2.jsonl and val_v2.jsonl instead, so the v1 files stay untouched.
 
 Deterministic for a given --seed and phrase bank(s).
@@ -28,6 +35,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "python"))
+import facts  # noqa: E402
 import vocab  # noqa: E402
 
 ALLOWED = set(vocab.TEXT_CHARS)
@@ -110,6 +118,8 @@ def merge_bank(bank, extra):
     for key, value in extra.items():
         if key == "task_weights":
             out[key] = dict(value)
+        elif not isinstance(value, list):
+            out[key] = value                    # scalar settings (game_boost, ...) replace
         elif key.startswith("act_"):
             outcomes = {}
             for entry in out.get(key, []) + value:
@@ -129,20 +139,27 @@ def gen_room(g, rng):
     ctx = {"LOC": rng.choice(G["LOC"]), "ROOM": rng.choice(G["ROOM"])}
     text = g.pick(f"room_{ctx['ROOM'].lower()}", ctx)
     extra = rng.random()
+    tail = None
     if extra < 0.25:
         ctx["OBJ"] = rng.choice(G["OBJ"])
         if maybe(rng, 0.3):
             ctx["OBJ2"] = rng.choice([o for o in G["OBJ"] if o != ctx["OBJ"]])
-            text += " " + g.pick("see_obj2", ctx)
+            tail = g.pick("see_obj2", ctx)
         else:
-            text += " " + g.pick("see_obj", ctx)
+            tail = g.pick("see_obj", ctx)
     elif extra < 0.45:
         ctx["MON"] = rng.choice(G["MON"])
-        text += " " + g.pick("see_mon", ctx)
+        tail = g.pick("see_mon", ctx)
     elif extra < 0.6:
         ctx["ENV"] = rng.choice(G["ENV"])
-        text += " " + g.pick(f"env_{ctx['ENV'].lower()}", ctx)
-    return ctx, text
+        tail = g.pick(f"env_{ctx['ENV'].lower()}", ctx)
+    if tail is None:
+        return ctx, text
+    # v3: a short opening leaves room for the second sentence in the game's 48 tokens
+    short = f"roomshort_{ctx['ROOM'].lower()}"
+    if g.bank.get("roomshort_share", 0) and short in g.bank and maybe(rng, g.bank["roomshort_share"]):
+        text = g.pick(short, ctx)
+    return ctx, text + " " + tail
 
 
 def gen_monster(g, rng):
@@ -214,7 +231,19 @@ def gen_combat(g, rng):
     return ctx, g.pick(rule, ctx)
 
 
+GAME_ACTIONS = [  # the game's own action records (rules.asm)
+    {"OBJ": "DOOR", "ACT": "OPEN", "OUT": "LOCKED"},
+    {"OBJ": "DOOR", "ITEM": "KEY", "ACT": "USE", "OUT": "SUCCESS"},
+    {"ACT": "SEARCH", "OUT": "TRAP"},
+]
+
+
 def gen_action(g, rng):
+    boost = g.bank.get("game_boost", 0)
+    if boost and maybe(rng, boost):
+        ctx = dict(rng.choice(GAME_ACTIONS))
+        key = OUTCOME_KEY[ctx["OUT"]]
+        return ctx, g.expand(rng.choice(g.acts[ctx["ACT"]][key]), ctx)
     act = rng.choice(sorted(g.acts))
     outcomes = g.acts[act]
     out = rng.choice(sorted(OUTCOME_KEY, key=str))
@@ -239,7 +268,35 @@ def gen_free(g, rng):
     if kind == "treasure" and "ITEM" not in hidden:
         return None
     prompt = g.pick(f"free_{kind}_prompt", hidden)
+    if TYPO_RATE and maybe(rng, TYPO_RATE):
+        prompt = add_typo(prompt, rng)
     return {"_prompt": prompt}, text
+
+
+TYPO_RATE = 0.0                 # set by --typos (v3: 0.3)
+KEY_ROWS = ["qwertyuiop", "asdfghjkl", "zxcvbnm"]
+
+
+def add_typo(text, rng):
+    """One keyboard slip in one word of 3+ letters: drop, double, swap or a neighbour key."""
+    spots = [m for m in re.finditer(r"[a-z]{3,}", text)]
+    if not spots:
+        return text
+    m = rng.choice(spots)
+    w = m.group(0)
+    i = rng.randrange(len(w))
+    kind = rng.choice(["drop", "double", "swap", "near"])
+    if kind == "drop":
+        w = w[:i] + w[i + 1:]
+    elif kind == "double":
+        w = w[:i] + w[i] + w[i:]
+    elif kind == "swap" and i < len(w) - 1:
+        w = w[:i] + w[i + 1] + w[i] + w[i + 2:]
+    else:
+        row = next(r for r in KEY_ROWS if w[i] in r)
+        j = row.index(w[i])
+        w = w[:i] + row[j - 1 if j and (j == len(row) - 1 or rng.random() < 0.5) else j + 1] + w[i + 1:]
+    return text[:m.start()] + w + text[m.end():]
 
 
 TASKS = {"ROOM": (gen_room, 0.22), "MONSTER": (gen_monster, 0.10), "TREASURE": (gen_treasure, 0.10),
@@ -279,7 +336,10 @@ def validate(example, ctx_len):
     return n <= ctx_len
 
 
-def generate(bank, seed, count, ctx_len):
+GAME_TASKS = {"ROOM", "MONSTER", "TREASURE", "COMBAT", "ACTION", "EVENT"}
+
+
+def generate(bank, seed, count, ctx_len, fact_filter=False, max_game_tokens=0, lex=None):
     rng = random.Random(seed)
     g = Grammar(bank, rng)
     names = list(TASKS)
@@ -297,6 +357,13 @@ def generate(bank, seed, count, ctx_len):
         example = to_example(task, *result, rng)
         if not validate(example, ctx_len):
             rejected["too_long"] += 1
+            continue
+        if fact_filter and facts.check(example["ctx"], example["text"]):
+            rejected["fact_check"] += 1
+            continue
+        if max_game_tokens and example["task"] in GAME_TASKS \
+                and len(lex.encode_text(example["text"])) + 1 > max_game_tokens:
+            rejected["game_length"] += 1
             continue
         key = json.dumps(example, sort_keys=True)
         if key in seen:
@@ -316,7 +383,15 @@ def main():
     parser.add_argument("--extra", type=Path, action="append", default=[],
                         help="phrase file merged onto the bank (repeatable)")
     parser.add_argument("--tag", default="", help="dataset tag, e.g. v2 (default: the v1 file names)")
+    parser.add_argument("--fact-filter", action="store_true",
+                        help="drop examples that break a python/facts.py rule")
+    parser.add_argument("--max-game-tokens", type=int, default=0,
+                        help="drop game-event texts longer than N bpe72 tokens incl. EOS (v3: 44)")
+    parser.add_argument("--typos", type=float, default=0.0,
+                        help="share of typed prompts given one keyboard slip (v3: 0.3)")
     args = parser.parse_args()
+    global TYPO_RATE
+    TYPO_RATE = args.typos
 
     bank_bytes = args.bank.read_bytes()
     bank = yaml.safe_load(bank_bytes)
@@ -327,7 +402,12 @@ def main():
     lint_bank(bank)
     tag = args.tag or "v1"
     sfx = f"_{args.tag}" if args.tag else ""
-    examples, rejected, attempts = generate(bank, args.seed, args.count, args.ctx)
+    lex = None
+    if args.max_game_tokens:
+        import lexicon
+        lex = lexicon.load("bpe72")
+    examples, rejected, attempts = generate(bank, args.seed, args.count, args.ctx,
+                                            args.fact_filter, args.max_game_tokens, lex)
     # Split by a hash of the whole example so an identical example never lands
     # in both splits. Training keeps repeats (natural task frequencies);
     # validation is de-duplicated.
@@ -363,6 +443,7 @@ def main():
         "val_text_seen_in_train": round(sum(e["text"] in train_texts for e in val) / max(1, len(val)), 3),
         "phrasebank_sha256": hashlib.sha256(bank_bytes).hexdigest(),
         "extra_files": [str(e.relative_to(ROOT)) if e.is_absolute() else str(e) for e in args.extra],
+        "fact_filter": args.fact_filter, "max_game_tokens": args.max_game_tokens, "typos": args.typos,
         "sha256": hashes,
     }
     missing = [t for t in vocab.TOKENS[vocab.FIRST_CONTROL_ID:] if t not in stats["token_coverage"]]

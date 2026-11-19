@@ -1,0 +1,444 @@
+{
+  "checkpoint": "models/checkpoints/baseline_bpe72_v3q/best.pt",
+  "package": "models/exported/baseline_bpe72_v3q.d64ai",
+  "params": 221760,
+  "tokenizer": "bpe72",
+  "nats_per_char": {
+    "float": 0.1144,
+    "int": 0.1143
+  },
+  "greedy_chars_per_token": 1.64,
+  "float_val_loss_full_split": 0.1925,
+  "teacher_forced": {
+    "examples": 100,
+    "positions": 3679,
+    "top1_agreement": 0.9995,
+    "float_loss": 0.1898,
+    "int_loss": 0.1897,
+    "int_tokens_per_second_python": 364.2
+  },
+  "greedy_response_exact_match": "29/30",
+  "int_max_abs": {
+    "matvec_acc": 35432929,
+    "attn_score": 1887035,
+    "attn_acc": 26056115,
+    "residual": 371868
+  },
+  "int_max_bits": {
+    "matvec_acc": 27,
+    "attn_score": 22,
+    "attn_acc": 26,
+    "residual": 20
+  },
+  "samples": [
+    {
+      "ctx": [
+        "TASK:COMBAT",
+        "MON:GOBLIN",
+        "MST:HEALTHY",
+        "ACT:ATTACK",
+        "OUT:HIT",
+        "HP:MID",
+        "LVL:MID"
+      ],
+      "prompt": null,
+      "data": "the goblin grunts as you strike it. it looks ready for a long fight.",
+      "int_greedy": "your blow lands on the goblin. it is fresh and eager for blood.",
+      "float_greedy": "your blow lands on the goblin. it is fresh and eager for blood.",
+      "int_topk8_t0.8": "your blow lands on the goblin. it is ready to fight.",
+      "int_greedy_tokens": 36
+    },
+    {
+      "ctx": [
+        "TASK:EVENT",
+        "ENV:SCREAM"
+      ],
+      "prompt": null,
+      "data": "a terrible cry rings out from below. your steps echo.",
+      "int_greedy": "a scream tears through the silence.",
+      "float_greedy": "a long wail fades into the dark.",
+      "int_topk8_t0.8": "someone, or something, screams far away.",
+      "int_greedy_tokens": 23
+    },
+    {
+      "ctx": [
+        "TASK:FREE"
+      ],
+      "prompt": "describe the echoing underground",
+      "data": "you find a crumbling stair. a massive troll is here.",
+      "int_greedy": "a room built to kill. a scream tears through the silence.",
+      "float_greedy": "a room built to kill. a scream tears through the silence.",
+      "int_topk8_t0.8": "a huge room with a high roof. a great red dragon turns toward you.",
+      "int_greedy_tokens": 39
+    },
+    {
+      "ctx": [
+        "TASK:MONSTER",
+        "MON:RAT",
+        "MST:HEALTHY"
+      ],
+      "prompt": null,
+      "data": "a filthy rat bares its yellow teeth. it shows no sign of weakness.",
+      "int_greedy": "a fat rat squeals and bares its yellow teeth.",
+      "float_greedy": "a fat rat squeals and bares its yellow teeth.",
+      "int_topk8_t0.8": "a fat rat creeps closer, tail lashing. it is fresh and eager for blood.",
+      "int_greedy_tokens": 30
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CRYPT",
+        "ROOM:HALL",
+        "MON:ORC"
+      ],
+      "prompt": null,
+      "data": "you enter a long hall. a hulking orc guards this place.",
+      "int_greedy": "a great hall. an one-eyed orc waits in the dark.",
+      "float_greedy": "a great hall. an one-eyed orc waits in the dark.",
+      "int_topk8_t0.8": "a wide dusty hall. you see an one-eyed orc.",
+      "int_greedy_tokens": 32
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:TEMPLE",
+        "ROOM:LIBRARY",
+        "OBJ:GATE",
+        "OBJ:STATUE"
+      ],
+      "prompt": null,
+      "data": "you enter a reading room. you spot a portcullis and a mossy statue.",
+      "int_greedy": "a quiet library of dust. here are a barred gate and a headless statue.",
+      "float_greedy": "a quiet library of dust. here are a barred gate and a headless statue.",
+      "int_topk8_t0.8": "a beast makes its home here. here are a gate of iron bars and a weeping statue.",
+      "int_greedy_tokens": 42
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:CAVERN",
+        "ROOM:PRISON",
+        "OBJ:ALTAR"
+      ],
+      "prompt": null,
+      "data": "a black cell block. a stained altar waits in the shadows.",
+      "int_greedy": "a row of cells. a bloodstained altar waits in the shadows.",
+      "float_greedy": "a row of cells. a bloodstained altar waits in the shadows.",
+      "int_topk8_t0.8": "a broken forge sits cold in the corner of this armory. your light falls on a cracked altar.",
+      "int_greedy_tokens": 34
+    },
+    {
+      "ctx": [
+        "TASK:FREE"
+      ],
+      "prompt": "describe a dragon",
+      "data": "a vast dragon lowers its great head and hisses.",
+      "int_greedy": "a spider as big as a dog clicks its fangs, eight eyes gleaming. it is nearly finished.",
+      "float_greedy": "a spider as big as a dog clicks its fangs, eight eyes gleaming. it is nearly finished.",
+      "int_topk8_t0.8": "a dark sorcerer raises a glowing hand.",
+      "int_greedy_tokens": 59
+    },
+    {
+      "ctx": [
+        "TASK:COMBAT",
+        "MON:TROLL",
+        "MST:DEAD",
+        "ACT:ATTACK",
+        "OUT:KILLED",
+        "HP:LOW"
+      ],
+      "prompt": null,
+      "data": "one last blow, and the brute is no more.",
+      "int_greedy": "the brute collapses at your feet, slain.",
+      "float_greedy": "the brute collapses at your feet, slain.",
+      "int_topk8_t0.8": "you strike the giant down. it moves no more.",
+      "int_greedy_tokens": 29
+    },
+    {
+      "ctx": [
+        "TASK:EVENT",
+        "LOC:SEWER",
+        "ENV:RUMBLE"
+      ],
+      "prompt": null,
+      "data": "far below, something heavy shifts. a faint echo answers your steps.",
+      "int_greedy": "a low rumble shakes the floor.",
+      "float_greedy": "a low rumble shakes the floor.",
+      "int_topk8_t0.8": "the ground trembles. dust falls from above.",
+      "int_greedy_tokens": 19
+    },
+    {
+      "ctx": [
+        "TASK:COMBAT",
+        "MON:TROLL",
+        "MST:WOUNDED",
+        "ACT:ATTACK",
+        "OUT:CRIT",
+        "HP:LOW",
+        "LVL:MID"
+      ],
+      "prompt": null,
+      "data": "a perfect strike! the giant reels. it is wounded and angry.",
+      "int_greedy": "a savage hit tears into the brute. it is wounded and angry.",
+      "float_greedy": "a savage hit tears into the brute. it is wounded and angry.",
+      "int_topk8_t0.8": "a mighty blow! you smash the troll. blood runs from its wounds.",
+      "int_greedy_tokens": 36
+    },
+    {
+      "ctx": [
+        "TASK:FREE"
+      ],
+      "prompt": "describe a room",
+      "data": "great pillars rise into darkness in this grim throne hall.",
+      "int_greedy": "a long hall of rough stone stretches into the gloom.",
+      "float_greedy": "a long hall of rough stone stretches into the gloom.",
+      "int_topk8_t0.8": "a secret chamber opens up. a slow chant echoes through the halls.",
+      "int_greedy_tokens": 30
+    },
+    {
+      "ctx": [
+        "TASK:TREASURE",
+        "ITEM:AMULET",
+        "OUT:FOUND"
+      ],
+      "prompt": null,
+      "data": "a bone amulet lies on the floor. a gem in its center flickers.",
+      "int_greedy": "you spot a pendant on a chain. it feels heavy with power.",
+      "float_greedy": "you spot a pendant on a chain. it feels heavy with power.",
+      "int_topk8_t0.8": "you uncover a bone amulet. it hangs from a fine chain.",
+      "int_greedy_tokens": 34
+    },
+    {
+      "ctx": [
+        "TASK:NPC",
+        "LOC:TOWER",
+        "NPC:GHOST",
+        "MOOD:FRIENDLY"
+      ],
+      "prompt": null,
+      "data": "a weeping spirit watches you warily. \"welcome, traveler. few come this deep.\"",
+      "int_greedy": "a weeping spirit watches you warily. \"well met. sit, and share my fire.\"",
+      "float_greedy": "a weeping spirit watches you warily. \"well met. sit, and share my fire.\"",
+      "int_topk8_t0.8": "a weeping spirit is here. \"you look tired, friend. be careful ahead.\"",
+      "int_greedy_tokens": 45
+    },
+    {
+      "ctx": [
+        "TASK:NPC",
+        "NPC:DWARF",
+        "MOOD:AFRAID"
+      ],
+      "prompt": null,
+      "data": "you meet a lost dwarf. \"please, do not hurt me!\"",
+      "int_greedy": "a dwarf with a lantern is here. \"is it gone? tell me it is gone!\"",
+      "float_greedy": "a dwarf with a lantern is here. \"is it gone? tell me it is gone!\"",
+      "int_topk8_t0.8": "you meet a grumpy dwarf. \"please, do not hurt me!\"",
+      "int_greedy_tokens": 36
+    },
+    {
+      "ctx": [
+        "TASK:ACTION",
+        "OBJ:BOOKSHELF",
+        "ITEM:WAND",
+        "ACT:USE",
+        "OUT:SUCCESS"
+      ],
+      "prompt": null,
+      "data": "with a click, a wand of bone opens a bookshelf of crumbling tomes.",
+      "int_greedy": "you use a carved wand on a tall bookshelf. it works.",
+      "float_greedy": "you use a carved wand on a tall bookshelf. it works.",
+      "int_topk8_t0.8": "a carved wand glows briefly as you use it.",
+      "int_greedy_tokens": 32
+    },
+    {
+      "ctx": [
+        "TASK:NPC",
+        "LOC:KEEP",
+        "NPC:HERMIT",
+        "MOOD:AFRAID"
+      ],
+      "prompt": null,
+      "data": "a bent old hermit is here. \"stay back! i have nothing worth taking!\"",
+      "int_greedy": "a bent old hermit turns to face you. \"stay back! i have nothing worth taking!\"",
+      "float_greedy": "a bent old hermit turns to face you. \"stay back! i have nothing worth taking!\"",
+      "int_topk8_t0.8": "you meet an old hermit. \"is it gone? tell me it is gone!\"",
+      "int_greedy_tokens": 50
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:KEEP",
+        "ROOM:PRISON",
+        "MON:SPIDER"
+      ],
+      "prompt": null,
+      "data": "empty cells line the walls. a hairy spider stirs in the dark.",
+      "int_greedy": "a row of cells. a huge spider waits.",
+      "float_greedy": "a row of cells. a huge spider waits.",
+      "int_topk8_t0.8": "rusted chains hang here. something moves. it is a black spider.",
+      "int_greedy_tokens": 24
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:TEMPLE",
+        "ROOM:SECRET_CHAMBER",
+        "HP:LOW"
+      ],
+      "prompt": null,
+      "data": "dust sits undisturbed in this gloomy hidden vault.",
+      "int_greedy": "a narrow gap in the wall leads into a forgotten room.",
+      "float_greedy": "a narrow gap in the wall leads into a forgotten room.",
+      "int_topk8_t0.8": "a hidden chamber lies behind the wall, untouched for ages.",
+      "int_greedy_tokens": 31
+    },
+    {
+      "ctx": [
+        "TASK:COMBAT",
+        "MON:SKELETON",
+        "MST:HEALTHY",
+        "ACT:ATTACK",
+        "OUT:HIT",
+        "HP:HIGH"
+      ],
+      "prompt": null,
+      "data": "you land a solid blow on a skeleton warrior. it shows no sign of weakness.",
+      "int_greedy": "your blow lands on the bones. it is fresh and eager for blood.",
+      "float_greedy": "your blow lands on the bones. it is fresh and eager for blood.",
+      "int_topk8_t0.8": "your blow lands on the dead thing. it is ready to fight.",
+      "int_greedy_tokens": 34
+    },
+    {
+      "ctx": [
+        "TASK:MONSTER",
+        "MON:DARK_MAGE",
+        "MST:DYING"
+      ],
+      "prompt": null,
+      "data": "a dark sorcerer traces a burning sigil in the air. it is nearly finished.",
+      "int_greedy": "a dark sorcerer raises a glowing hand. it is almost spent.",
+      "float_greedy": "a dark sorcerer raises a glowing hand. it is almost spent.",
+      "int_topk8_t0.8": "a dark sorcerer raises a glowing hand. it is nearly finished.",
+      "int_greedy_tokens": 33
+    },
+    {
+      "ctx": [
+        "TASK:MONSTER",
+        "LOC:KEEP",
+        "MON:RAT",
+        "MST:DYING",
+        "HP:HIGH",
+        "LVL:MID"
+      ],
+      "prompt": null,
+      "data": "a fat rat squeals and darts closer. it can barely stand.",
+      "int_greedy": "a filthy rat squeals and darts closer. it is nearly finished.",
+      "float_greedy": "a filthy rat squeals and darts closer. it is nearly finished.",
+      "int_topk8_t0.8": "a fat rat gnaws on an old bone, then looks at you. it staggers, close to death.",
+      "int_greedy_tokens": 39
+    },
+    {
+      "ctx": [
+        "TASK:ROOM",
+        "LOC:SEWER",
+        "ROOM:PRISON",
+        "LVL:HIGH"
+      ],
+      "prompt": null,
+      "data": "rusted cells line this gloomy prison block.",
+      "int_greedy": "a jailer's stool sits beside a ring of empty cells.",
+      "float_greedy": "a jailer's stool sits beside a ring of empty cells.",
+      "int_topk8_t0.8": "names and prayers are scratched into the cell walls.",
+      "int_greedy_tokens": 37
+    },
+    {
+      "ctx": [
+        "TASK:FREE"
+      ],
+      "prompt": "what creature is this",
+      "data": "a wart-faced goblin cackles and darts behind a pillar. it sways on its feet.",
+      "int_greedy": "a scrawny goblin hisses at you. it is wounded and angry.",
+      "float_greedy": "a scrawny goblin hisses at you. it is wounded and angry.",
+      "int_topk8_t0.8": "a brutish orc blocks the way, tusks bared.",
+      "int_greedy_tokens": 33
+    },
+    {
+      "ctx": [
+        "TASK:NPC",
+        "LOC:SEWER",
+        "NPC:PRISONER",
+        "MOOD:HOSTILE"
+      ],
+      "prompt": null,
+      "data": "a pale prisoner is here. \"leave now, or die here.\"",
+      "int_greedy": "a ragged prisoner is here. \"turn back. you are not welcome.\"",
+      "float_greedy": "a ragged prisoner is here. \"turn back. you are not welcome.\"",
+      "int_topk8_t0.8": "you meet a ragged prisoner. \"another fool come to rob the dead?\"",
+      "int_greedy_tokens": 35
+    },
+    {
+      "ctx": [
+        "TASK:FREE"
+      ],
+      "prompt": "what does this room look like",
+      "data": "you enter a tomb of the dead. a cold wind moans through the passage.",
+      "int_greedy": "a room built to kill. a scream tears through the silence.",
+      "float_greedy": "a room built to kill. a scream tears through the silence.",
+      "int_topk8_t0.8": "a crumbling skeleton rises from the dust, a rusty blade in hand.",
+      "int_greedy_tokens": 39
+    },
+    {
+      "ctx": [
+        "TASK:COMBAT",
+        "MON:ORC",
+        "ACT:FLEE",
+        "OUT:SUCCESS",
+        "HP:MID"
+      ],
+      "prompt": null,
+      "data": "you run, and the sounds of the brute fade behind you.",
+      "int_greedy": "you run, and the sounds of the orc fade behind you.",
+      "float_greedy": "you run, and the sounds of the orc fade behind you.",
+      "int_topk8_t0.8": "you escape into the dark, heart pounding.",
+      "int_greedy_tokens": 27
+    },
+    {
+      "ctx": [
+        "TASK:TREASURE",
+        "ITEM:AXE",
+        "OUT:FOUND"
+      ],
+      "prompt": null,
+      "data": "you find a double-bladed axe. the edge is still sharp.",
+      "int_greedy": "you spot a hand axe. it is heavy but deadly.",
+      "float_greedy": "you spot a hand axe. it is heavy but deadly.",
+      "int_topk8_t0.8": "you find a heavy axe. it feels good in your grip.",
+      "int_greedy_tokens": 26
+    },
+    {
+      "ctx": [
+        "TASK:FREE"
+      ],
+      "prompt": "what is hppening",
+      "data": "a scream tears through the silence.",
+      "int_greedy": "a slow chant echoes through the halls.",
+      "float_greedy": "a slow chant echoes through the halls.",
+      "int_topk8_t0.8": "the ground trembles. dust falls from above. a faint echo answers your steps.",
+      "int_greedy_tokens": 23
+    },
+    {
+      "ctx": [
+        "TASK:NPC",
+        "LOC:TOWER",
+        "NPC:PRIEST",
+        "MOOD:AFRAID"
+      ],
+      "prompt": null,
+      "data": "a grim priest steps out of the shadows. \"stay back! i have nothing worth taking!\"",
+      "int_greedy": "a solemn priest is here. \"stay back! i have nothing worth taking!\"",
+      "float_greedy": "a solemn priest is here. \"stay back! i have nothing worth taking!\"",
+      "int_topk8_t0.8": "a grim priest looks up at you. \"you are not one of them, are you?\"",
+      "int_greedy_tokens": 41
+    }
+  ]
+}

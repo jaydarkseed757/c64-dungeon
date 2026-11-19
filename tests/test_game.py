@@ -206,3 +206,24 @@ def test_death_and_victory():
         assert "victory" in " ".join(g.screen()[17:24]).lower()
     finally:
         g.close()
+
+
+def _open_screen(game, key):
+    """Press a key that opens a full-view screen and stop while it waits for a key."""
+    game.vm.write(0x0277, bytes([key]))
+    game.vm.write(0xC6, bytes([1]))
+    while game.vm.read(0xC6, 0xC6)[0]:
+        game._step()
+    game._step()                      # the screen is drawn and polls GETIN again
+    return game.screen()
+
+
+@pytest.mark.parametrize("key,title", [(0x49, "Your pack"), (0x43, "")])
+def test_item_and_character_screens_are_clean(game, key, title):
+    """clear_view once filled the view with screen code 13 ("m"): only spaces and text."""
+    rows = _open_screen(game, key)[1:16]
+    view = game.vm.read(0x0400 + 40, 0x0400 + 16 * 40 - 1)
+    assert 0x0D not in view, "\n".join(rows)
+    assert all(len(r) <= 40 for r in rows)
+    if title:
+        assert rows[1].strip().startswith(title) and rows[1].rstrip().endswith("close)")

@@ -239,13 +239,19 @@ The engine's regions stay free for Milestone 6. The PRG is 46.5 KB because ACME 
 - locked and unlocked doors
 - traps
 
-Generation settings: at most 48 tokens (about 80 characters), temperature 0.8, top-8, seeded from timers and the turn counter. The text streams into the log in light blue while the help row shows "Dungeon Master thinking... (RUN/STOP)".
+Generation settings: at most 48 tokens (about 80 characters), temperature 0.8, top-8, seeded from timers and the turn counter. The text appears in the log in light blue, one whole word at a time, while the help row shows "Dungeon Master thinking... (RUN/STOP)".
 
 **Rules stay with the game:**
 
 - **Numbers:** after narrated text the game prints its own numbers in grey: "+5 XP.", "(-3 HP)", "(+12 gold)".
 - **The quest introduction stays built-in.** The model only knows a generic "find the relic" quest and could state the wrong goal.
 - **Hits, misses, wounds, potions and rest** stay built-in, to keep turns quick.
+
+**Fact check (Milestone 8):** each finished word is looked up in `fact_words` before it is shown. The list is generated from `python/facts.py` into `game/source/generated/fact_words.asm`. A word matches an entry, or the entry plus "s" or "es".
+
+- **A monster that isn't in the record** (any monster for a room without one): the word is never shown. Generation stops, the sentence ends with "...", and the built-in line follows.
+- **A name the event needs** never came: a sighting must name its monster, treasure its item, a locked door must say "lock". The built-in line is printed after the text.
+- The check costs about 9 bytes of state at `$C9E7–$C9EF` and part 1 now ends at `$1D99`.
 
 **Fallbacks:** the built-in text is used whenever the narrator cannot speak:
 
@@ -260,7 +266,7 @@ RUN/STOP after some text ends the sentence with "...".
 
 | Range | Used |
 | --- | --- |
-| Part 1 | `$0801–$1A7B` |
+| Part 1 | `$0801–$1D99` |
 | Engine | `$2000–$4EA6` |
 | Part 2 | `$5000–$5EF7` |
 | Part 3 | `$B500–$BDC3` |

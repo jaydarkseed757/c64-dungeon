@@ -61,4 +61,4 @@ def main(path):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else str(ROOT / "models/exported/baseline_bpe72_v2.d64ai"))
+    main(sys.argv[1] if len(sys.argv) > 1 else str(ROOT / "models/exported/baseline_bpe72_v3q.d64ai"))
