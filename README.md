@@ -65,9 +65,10 @@ Download them from the [latest release](https://github.com/jaydarkseed757/c64-du
 
 | File | Purpose |
 | --- | --- |
-| `dungeon-master-64.d64` | Disk image with both programs (the model file is too big for a disk; load `DM64AI.REU` separately) |
+| `dungeon-master-64.d64` | Disk image with the three programs (the model file is too big for a disk; load `DM64AI.REU` separately) |
 | `DM64GAME.PRG` | The dungeon game with the AI Dungeon Master |
 | `DM64.PRG` | The AI terminal |
+| `BENCH.PRG` | A 5-minute benchmark with live speed statistics ([docs/BENCH.md](docs/BENCH.md)) |
 | `DM64AI.REU` | The model (load it into the REU) |
 | `MANIFEST.JSON` | Model description: shape, tensor layout, SHA-256 |
 | `README.TXT` | Player instructions for the Ultimate |
@@ -163,6 +164,7 @@ make convert MODEL=baseline_bpe72_v3q VERSION=dm64-bpe72-v3q
 | --- | --- |
 | `engine/` | The 6502 inference engine (`source/`, `include/`, VICE and hardware test hosts) |
 | `terminal/` | The AI terminal |
+| `bench/` | BENCH.PRG, the on-device benchmark |
 | `game/` | The dungeon game and its narrator interface |
 | `python/` | Model, tokenizer, training, quantization, `.d64ai` writer, integer reference |
 | `tools/` | Dataset generator, format validator, VICE harness, profiler, Ultimate upload and hardware checks |
@@ -206,6 +208,7 @@ make convert MODEL=baseline_bpe72_v3q VERSION=dm64-bpe72-v3q
 | [docs/GAME_DESIGN.md](docs/GAME_DESIGN.md) | The dungeon game as built |
 | [docs/TERMINAL.md](docs/TERMINAL.md) | The AI terminal |
 | [docs/HW_RESULTS.md](docs/HW_RESULTS.md) | Everything measured on the C64 Ultimate |
+| [docs/BENCH.md](docs/BENCH.md) | BENCH.PRG: a 5-minute benchmark on the C64 with a correctness check |
 | [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | Prerequisites, make targets, VICE and hardware workflows |
 | [docs/REFERENCE_IMPLEMENTATIONS.md](docs/REFERENCE_IMPLEMENTATIONS.md) | Study of Tiny21 and llama2.c64 |
 | [docs/FEASIBILITY_AND_RISKS.md](docs/FEASIBILITY_AND_RISKS.md) | Early risk register and benchmark plan |

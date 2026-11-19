@@ -11,7 +11,7 @@ ACME    := acme -f cbm
 TABLES  := engine/source/generated/exp_table.asm
 ENGINE_SRC := $(wildcard engine/source/*.asm engine/include/*.inc) $(TABLES)
 
-.PHONY: help venv dataset dataset-v2 dataset-v3 fact-check test test-slow train train-bringup convert evaluate validate inspect sizing \
+.PHONY: help venv dataset dataset-v2 dataset-v3 fact-check bench hw-bench test test-slow train train-bringup convert evaluate validate inspect sizing \
         engine profile ultimate ultimate-dry terminal hw-check hw-terminal game
 
 help:
@@ -32,6 +32,8 @@ help:
 	@echo "make inspect         print the package summary"
 	@echo "make sizing          architecture size table (docs/ARCHITECTURE.md)"
 	@echo "make terminal        assemble the AI terminal: terminal/build/dm64.prg"
+	@echo "make bench           assemble the benchmark: bench/build/bench.prg (BENCH.PRG)"
+	@echo "make hw-bench        run BENCH.PRG for 5 minutes on the C64 Ultimate and check it"
 	@echo "make game            assemble the dungeon game: game/build/dm64game.prg"
 	@echo "make hw-check        run the engine hardware check on the Ultimate (REST)"
 	@echo "make hw-terminal     type a prompt into the terminal on the Ultimate (REST)"
@@ -82,6 +84,16 @@ terminal/build/dm64.prg: terminal/source/terminal.asm $(TERM_TABLES) $(ENGINE_SR
 
 terminal: terminal/build/dm64.prg
 
+BENCH_TABLES := bench/source/generated/bench_tables.asm
+$(BENCH_TABLES): tools/bench.py python/vocab.py python/lexicon.py
+	$(PY) tools/bench.py tables
+
+bench/build/bench.prg: bench/source/bench.asm $(BENCH_TABLES) $(ENGINE_SRC)
+	@mkdir -p bench/build
+	python3 tools/acme_longbranch.py $(ACME) -o $@ -l bench/build/bench.lbl $<
+
+bench: bench/build/bench.prg
+
 GAME_TABLES := game/source/generated/game_tables.asm
 $(GAME_TABLES): tools/gen_game_tables.py python/vocab.py python/facts.py
 	$(PY) tools/gen_game_tables.py
@@ -95,6 +107,9 @@ game: game/build/dm64game.prg
 # Hardware runs on the C64 Ultimate (ULT_HOST). They reset the C64; the REU keeps its contents.
 hw-check: engine
 	$(PY) tools/hw_check.py --ultimate
+
+hw-bench: bench
+	$(PY) tools/bench.py ultimate --turbo
 
 hw-terminal: terminal
 	$(PY) tools/terminal_hw.py --exact
@@ -132,8 +147,8 @@ sizing:
 # Release files to the C64 Ultimate over FTP (host: ULT_HOST, default 192.168.10.148).
 SHIP_MODEL := models/exported/baseline_bpe72_v3q.d64ai
 
-ultimate: $(SHIP_MODEL) terminal game
+ultimate: $(SHIP_MODEL) terminal game bench
 	python3 tools/ultimate_upload.py
 
-ultimate-dry: $(SHIP_MODEL) terminal game
+ultimate-dry: $(SHIP_MODEL) terminal game bench
 	python3 tools/ultimate_upload.py --dry-run

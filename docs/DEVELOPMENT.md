@@ -173,6 +173,7 @@ Verified on the user's C64 Ultimate: Starlight Edition, firmware 1.1.0, at `192.
 | `make hw-terminal` / `.venv/bin/python tools/terminal_hw.py [--exact] [--prompt T] [--scene F1]` | Runs `DM64.PRG`, types over REST (`machine:writemem` to `$0277`/`$C6`), and reads the answer and screen. `--exact` compares with the reference. |
 | `make ultimate` | FTP the release files to `/USB1/dist/dungeon-master/` (asks first) |
 | `python3 tools/ult_screenshot.py out.png [--scale 2]` | Screenshot. Uses the VIC video stream if available (needs wired Ethernet), otherwise a text-mode reconstruction from screen and colour RAM read over REST. Read-only; does not reset the C64. |
+| `make bench`, `make hw-bench` | BENCH.PRG: 5-minute benchmark; `hw-bench` runs it on the Ultimate (resets the C64) and checks the token CRC. See `docs/BENCH.md`. |
 
 **Settings policy for automated runs.** Turbo Control and the Command Interface may be changed over REST:
 

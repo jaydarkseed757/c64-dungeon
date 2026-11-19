@@ -16,3 +16,4 @@ game/build/
 CLAUDE.md
 .DS_Store
 *.lbl
+bench/build/

@@ -111,3 +111,47 @@ C64U, turbo registers at 64 MHz (`$D031` read back `$8F`), REU 16 MB, format 1.1
 | F1 room scene, creative mode | "You enter a great hall. Broken tables lie overturned. Near the wall is an old spear rack." | 89 characters, 33.4 s | 2.66 |
 
 - Previous build, same model: F1 1.89, F3 1.72 characters/s. This one run is about 1.4–1.5× faster; VICE predicted 1.76× per step at position 0, less at later positions where attention grows. One sample only; a `tools/terminal_hw.py --exact` run is still to do.
+
+## BENCH.PRG, 5 minutes (2026-11-18)
+
+**Setup:**
+- C64U (firmware 1.1.0), Turbo Control = C64U Turbo Registers (64 MHz), REU 16 MB.
+- The user started `BENCH.PRG` from the file browser. Results were read afterwards over REST (`machine:readmem $C800`, read-only).
+- **Model in the REU: `baseline_bpe72`** (format 1.1). Identified by the loaded payload CRC32 `b8367b29`. It was not the shipped `baseline_bpe72_v3q`, although that is the only `DM64AI.REU` on the USB drive.
+
+![BENCH.PRG on the C64U](screenshots/bench_hw.png)
+
+| Measure | Result |
+|---|---|
+| Run | 5:00.3 by the TOD clock; CIA rate measured at 1,022 kHz (NTSC-rate CIA clock) |
+| Requests completed | 13 (the 14th was cut off at 5:00) |
+| Prompt tokens | 115, **460 ms/token** |
+| Generated tokens | 435, **565 ms/token** (fastest 481, slowest 702 ms) |
+| Throughput over the whole run | **1.44 tokens/s, 2.31 characters/s** (696 characters) |
+| Correctness | CRC32 of all tokens of the 13 requests `5eedd601` = `python/reference_int.py` with `baseline_bpe72` (409 generated tokens) |
+
+- **First hardware proof of the Milestone 7 engine.** The format 1.1 bitplane engine is bit-exact on the C64U, not just in VICE.
+- **The throughput counts the whole run:** prompts, two long typed prompts, and screen updates. The single F1 scene measured earlier ran at 2.66 characters/s.
+- **Per-token time grows with the context position:** 481 ms at the start, up to 702 ms late in a long request.
+- **Before** (format 1.0 engine): about 850–950 ms per token. **After:** 565 ms per generated token, about 1.6× faster.
+- `baseline_bpe72_v3q` has the same shape and token set, so it should cost about the same per step; that is not measured yet.
+
+### Second run, with the shipped model `baseline_bpe72_v3q` (2026-11-18)
+
+The user loaded `DM64AI.REU` into the REU and ran `BENCH.PRG` again. Loaded payload CRC32: `99e10fea` = `baseline_bpe72_v3q`.
+
+![BENCH.PRG with v3q on the C64U](screenshots/bench_hw_v3q.png)
+
+| Measure | Result |
+|---|---|
+| Run | 5:00.2 by the TOD clock, CIA 1,022 kHz |
+| TOD vs the Mac clock | 225.2 s on the TOD clock in 226 s of Mac time, read every 15 s over REST: within 1% |
+| Requests completed | 14 |
+| Prompt tokens | 121, **463 ms/token** |
+| Generated tokens | 431, **563 ms/token** (fastest 488, slowest 710 ms) |
+| Throughput over the whole run | **1.44 tokens/s, 2.29 characters/s** (687 characters) |
+| Correctness | CRC32 `c8d31519` = `python/reference_int.py` with `baseline_bpe72_v3q`, all 14 requests |
+
+- **Cost per token:** v3q costs the same per token as `baseline_bpe72` (563 against 565 ms).
+- **More requests:** v3q finished 14 requests instead of 13, because its texts are shorter (Milestone 8 data).
+- **First game-model run on hardware:** this is the first hardware run of the shipped v3q model, and it is bit-exact.

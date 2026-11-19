@@ -27,7 +27,8 @@ REMOTE_NAME = "dungeon-master"
 # (local path relative to the project, name on the Ultimate)
 MANIFEST = [
     ("terminal/build/dm64.prg", "DM64.PRG"),                  # the AI terminal
-    ("game/build/dm64game.prg", "DM64GAME.PRG"),              # the dungeon game (Milestone 5, no AI yet)
+    ("game/build/dm64game.prg", "DM64GAME.PRG"),              # the dungeon game with the AI narrator
+    ("bench/build/bench.prg", "BENCH.PRG"),                   # 5-minute benchmark (docs/BENCH.md)
     ("models/exported/baseline_bpe72_v3q.d64ai", "DM64AI.REU"),       # .REU: the menu offers "Load into REU"
     ("models/exported/baseline_bpe72_v3q.manifest.json", "MANIFEST.JSON"),
     ("release/README.txt", "README.TXT"),

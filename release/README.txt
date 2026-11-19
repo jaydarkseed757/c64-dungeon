@@ -8,6 +8,8 @@ DM64GAME.PRG   The dungeon game with the AI Dungeon Master. Narration needs
 DM64AI.REU     The storytelling model (format .d64ai 1.1, about 237 KB; writes
                whole letter groups like "the" in one step).
 MANIFEST.JSON  Model description (size, SHA-256, tensor layout).
+BENCH.PRG      A 5-minute benchmark of the model: live speed statistics and
+               a summary at the end (RUN/STOP ends early, RETURN repeats).
 
 Everything runs on the C64 itself: the model is a 221,760-parameter transformer
 and the 6502 code computes every character. No network, no PC.
